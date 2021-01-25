@@ -1,0 +1,1 @@
+Second attemp in making a portfolio. I am not satisfied with my first attempt, so the purpose of this second attempt is to implement what I learned from my first attempt in order to create a better website. 
