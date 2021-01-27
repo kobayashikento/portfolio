@@ -1,0 +1,24 @@
+html,
+body,
+
+.app {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    padding-top: 0vh;
+}
+
+.slider {
+    transition: transform 600ms ease-in-out;
+}
+
+.slider > div {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+}

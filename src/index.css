@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'FuturaM';
+  src: local('FuturaM'), url(./Assets/fonts/FuturaMedium.otf);
+}
+
+@font-face {
+  font-family: 'FuturaB';
+  src: local('FuturaB'), url(./Assets/fonts/FuturaBook.otf);
+}
