@@ -21,3 +21,8 @@ code {
   font-family: 'FuturaB';
   src: local('FuturaB'), url(./Assets/fonts/FuturaBook.otf);
 }
+
+@font-face {
+  font-family: 'DINNextLTPro-Medium';
+  src: local('DINNextLTPro-Medium'), url(./Assets/fonts/DINNextLTPro-Medium.otf);
+}
