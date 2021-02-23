@@ -173,7 +173,7 @@ const Skeleton = (props) => {
                         }
                         setTimeout(() => {
                             setIndex((i) => clamp(i - s, 0, slides.length - 1))
-                        }, 400)
+                        }, 200)
                         return true
                     }
                 } else return false

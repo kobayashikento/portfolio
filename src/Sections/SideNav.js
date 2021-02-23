@@ -39,14 +39,14 @@ const SideNav = (props) => {
     });
 
     const springCancel1 = useSpring({
-        to: { opacity: props.modalOpen ? 1 : 0, transform: props.modalOpen ? "rotate(135deg)" : "rotate(0deg)" },
-        from: { opacity: 0, transform: "rotate(0deg)" },
+        to: { opacity: props.modalOpen ? 1 : 0, transform: props.modalOpen ? "translateY(16px) rotate(135deg)" : "translateY(16px) rotate(0deg)", zIndex: props.modalOpen ? 2000 : -1 },
+        from: { opacity: 0, transform: "translateY(16px) rotate(0deg)", zIndex: -1 },
         config: { duration: 500 },
     })
 
     const springCancel2 = useSpring({
-        to: { opacity: props.modalOpen ? 1 : 0, transform: props.modalOpen ? "rotate(225deg)" : "rotate(0deg)" },
-        from: { opacity: 0, transform: "rotate(0deg)" },
+        to: { opacity: props.modalOpen ? 1 : 0, transform: props.modalOpen ? "translateY(16px) rotate(225deg)" : "translateY(16px) rotate(0deg)", zIndex: props.modalOpen ? 2000 : -1 },
+        from: { opacity: 0, transform: "translateY(16px) rotate(0deg)", zIndex: -1 },
         config: { duration: 500 },
     })
 
@@ -92,7 +92,7 @@ const SideNav = (props) => {
                     height: "3px", background: "white", borderRadius: "4px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
                 }} />
             </animated.div>
-            <div style={{ position: 'absolute', cursor: "pointer" }} onClick={() => handleCancel()}>
+            <div style={{ position: 'absolute', cursor: "pointer", width: "32px", height: "32px", zIndex: props.modalOpen ? 2000 : -1 }} onClick={() => handleCancel()}>
                 <animated.div style={{ ...springCancel1, position: 'absolute' }} onClick={() => handleCancel()}>
                     <Divider style={{
                         height: "3px", background: "rgb(255, 77, 90)", borderRadius: "4px", width: "2rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"

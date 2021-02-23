@@ -1,0 +1,35 @@
+.vertical-timeline::before {
+    background: rgba(7, 33, 66, 0.7);
+}
+
+.vertical-timeline-element-title {
+    font-family: "FuturaB";
+    letter-spacing: 2px;
+}
+
+.vertical-timeline-element-subtitle {
+    font-family: "'Rajdhani', sans-serif";
+    letter-spacing: 0.5px;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.vertical-timeline-element-icon {
+    -webkit-box-shadow: 0 0 0 4px rgba(7, 33, 66, 0.7), 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%);
+    box-shadow: 0 0 0 4px rgba(7, 33, 66, 0.7), 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%);
+}
+
+.vertical-timeline-element-content p {
+    font-family: "FuturaB";
+    letter-spacing: 1px;
+    font-size: 15px;
+    line-height: 21px;
+}
+
+.vertical-timeline-element-content {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.vertical-timeline-element-content .vertical-timeline-element-date {
+    color: rgba(7, 33, 66, 0.9);
+}

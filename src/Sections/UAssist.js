@@ -15,8 +15,19 @@ import uassistClearPic from '../Assets/pictures/uassist_clean.png';
 
 import * as easings from 'd3-ease';
 
+import uaMainPic from '../Assets/pictures/ua_main_pic.png';
+import uaAllPic from '../Assets/pictures/ua_all_pic.png';
+
+import { connect } from 'react-redux';
+import { setModalOpen } from '../Redux/actions/propertyAction';
+
 const content = {
-   
+    mockOverview: uaMainPic, dutiesText: ["full-stack /", "developer"], techText: ["MongoDB", "Express", "JavaScript", "Bootstrap"],
+    dateText: "Dec, 2019", overviewText: "A website that focuses on Rest API design and data management using MongoDB.",
+    mockAll: uaAllPic, detailsText: "This website was built during my Web Development course at U of T with a team of 2 other students. The focus of this project was more towards the back-end implementation using MongoDB and expressJS via NodeJS. As a team we made sure that all asynchronous calls to the backend were handled appropriately. My team and I received a 95% grade on this project.",
+    longpic1: null, longpic2: null, mainPicWidth: "65%",
+    focusDevText: "Learned about  ExpressJS, MongoDB Schema Design, NodeJS, RestAPI in lecture to create a website that makes AJAX calls to the mongoDB to retrieve appropriate JSON files. Implemented user authentication by creating user “authentication tokens” using JWT, and created hashed passwords with additional “salt” using Bcrypt.",
+    focusDesignText: "Used Bootstrap for the majority of the website and implemented modals and forms from the library to be consistent in the design."
 }
 
 const Slide = React.forwardRef(function Slide(props, ref) {
@@ -54,50 +65,68 @@ const UAssist = (props) => {
         from: { transform: `translateX(-100%)`, zIndex: 5 },
         config: { duration: 800, easing: easings.easeCubicOut },
         delay: 300
-    })
+    });
 
     const springLine = useSpring({
         to: { transform: props.render ? `translateX(0rem)` : `translateX(-6.5rem)` },
         from: { width: "5.5rem", transform: `translateX(-6.5rem)`, zIndex: 5 },
         delay: 300
-    })
+    });
 
     const springLineMove = useSpring({
         to: { transform: props.render ? `translateX(0rem)` : `translateX(-9.5rem)` },
         from: { width: "5.5rem", transform: `translateX(-9.5rem)`, zIndex: 5 },
         delay: 500
-    })
+    });
 
     const springSecond = useSpring({
         to: { transform: props.render ? `translateX(0%)` : `translateX(-110%)` },
         from: { transform: `translateX(-110%)`, zIndex: 5 },
         delay: 600
-    })
+    });
+
+    const [initialRender, setInitialRender] = React.useState(true);
+
+    React.useEffect(() => {
+        if (props.render) {
+            setTimeout(() => {
+                setInitialRender(false);
+            }, 100)
+        } else if (!props.render) {
+            setInitialRender(true);
+        }
+    }, [props.render]);
 
     const videoSpring = useSpring({
-        to: { transform: props.render ? "scale(1) translate(0%, -50%)" : "scale(0.7) translate(10% ,-50%)", opacity: props.render ? 1 : 0 },
-        from: { right: "8%", top: "50%", transform: "scale(0.6) translate(10% ,-50%)", transformOrigin: "top center 20px", opacity: 0 },
-        config: { duration: 1200, easing: easings.easeQuadOut },
-        delay: 600
-    })
+        to: {
+            transform: props.render ? "scale(1) translate(0%, -50%)" : "scale(0.7) translate(10% ,-50%)", opacity: props.render ? 1 : 0,
+            height: uaModalOpen ? "100%" : "70%", width: uaModalOpen ? "66%" : "54%", right: uaModalOpen ? "0%" : "8%"
+        },
+        from: {
+            right: "8%", top: "50%", transform: "scale(0.6) translate(10% ,-50%)", transformOrigin: "top center 20px", opacity: 0,
+            height: "70%", width: "54%", zIndex: 3
+        },
+        config: { duration: uaModalOpen ? 600 : 1200, easing: easings.easeQuadOut },
+        delay: !initialRender ? 0 : 600
+    });
 
     const videoOverlay = useSpring({
         to: { width: props.render ? "0%" : "100%" },
         from: { position: "absolute", height: "100%", width: "100%", background: "linear-gradient(90deg, #ff4d5a 10%, #072142 20%)", zIndex: 2, right: "0" },
         config: { duration: 1000, easing: easings.easeQuadOut },
-        delay: 700
-    })
+        delay: 300
+    });
 
     const springThird = useSpring({
-        to: { transform: props.render ? `translateX(0%)` : `translateX(-100%)`, opacity: props.render ? 1 : 0 },
+        to: { transform: props.render ? `translateX(0%)` : `translateX(-100%)`, opacity: props.render ? 1 : 0, right: uaModalOpen ? "3%" : "-6.6%" },
         from: { right: "-6.6%", zIndex: 5, bottom: "8%", position: "absolute", transform: `translateX(-100%)`, opacity: 0 },
-        delay: 800
-    })
+        delay: !initialRender ? 0 : 800
+    });
 
     const imageHoverSpring = useSpring({
         to: { opacity: imageHover ? 0 : 1 },
         fromt: { opacity: 1 }
-    })
+    });
 
     const handleClick = () => {
         props.setModalOpen(true);
@@ -151,10 +180,15 @@ const UAssist = (props) => {
                     </Typography>
                 </animated.div>
                 <animated.div style={springSecond}>
-                    <button class="explore" style={{ fontFamily: "FuturaB", boxShadow: "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px" }}>Explore<span class="icon-right"></span><span class="icon-right after"></span></button>
+                    <button onClick={() => handleClick()}
+                        class="explore" style={{ fontFamily: "FuturaB", boxShadow: "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px" }}>Explore<span class="icon-right"></span><span class="icon-right after"></span></button>
                 </animated.div>
             </animated.div>
-            <animated.div style={{ ...videoSpring, height: "70%", width: "54%", position: "absolute", boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px" }}>
+            <animated.div
+                style={{
+                    ...videoSpring, position: "absolute",
+                    boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
+                }}>
                 <animated.div style={videoOverlay} />
                 <img src={uassistClearPic} style={{ height: "100%", width: "100%", borderRadius: "2px", position: "absolute" }} />
                 <animated.div style={imageHoverSpring} onMouseEnter={() => setImageHover(true)} onMouseLeave={() => setImageHover(false)}>
@@ -186,4 +220,16 @@ const UAssist = (props) => {
     )
 }
 
-export default React.memo(UAssist);
+const mapStateToProps = (state) => {
+    return {
+        modalOpen: state.propertyReducer.modalOpen,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setModalOpen: (boolean) => dispatch(setModalOpen(boolean))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UAssist);

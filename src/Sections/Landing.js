@@ -197,7 +197,7 @@ const Landing = (props) => {
         <div style={{ display: "flex", height: "100vh", width: "100vw", position: "relative", justifyContent: "center" }} onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
             <animated.div style={{
                 overflow: "hidden", display: "flex", height: "100%",
-                flexDirection: "column", width: "100%", justifyContent: "center", alignItems: "flex-start", marginLeft: "11%"
+                flexDirection: "column", width: "100%", justifyContent: "center", alignItems: "flex-start", marginLeft: "12.2vmax"
             }}>
                 <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", zIndex: 100 }}>
                     <animated.div style={{ overflow: "hidden", transform: prop.xy.interpolate(trans1) }}>

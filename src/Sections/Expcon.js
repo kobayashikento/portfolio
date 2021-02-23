@@ -22,8 +22,6 @@ import mockAll from '../Assets/pictures/expcon_all_mock.png';
 import longpic1 from '../Assets/pictures/expcon_long_1.png';
 import longpic2 from '../Assets/pictures/expcon_long_2.png';
 
-import Fade from '@material-ui/core/Fade';
-
 import { connect } from 'react-redux';
 import { setModalOpen } from '../Redux/actions/propertyAction';
 
@@ -31,7 +29,9 @@ const content = {
     mockOverview: mockOverview, dutiesText: ["designer", "developer"], techText: ["React", "Redux", "JavaScript", "Material UI"],
     dateText: "Jan, 2021", overviewText: "A website that focuses on building an interactive online music experience.",
     mockAll: mockAll, detailsText: "This website was built using React and focuses heavily on engaging the viewers through the use of parallaxes and meaningful animations. I created functional components for sections that had similar layouts to reduce unnecessary code and used React Redux so that components would share global states to reduce client-side lags.",
-    longpic1: longpic1, longpic2: longpic2
+    longpic1: longpic1, longpic2: longpic2, mainPicWidth: "70%", 
+    focusDevText: "Learned WebGL and three.JS to build a  more interactive video transition for the landing page. In addition, I learned GSAP (GreenSock) to implement scrollTo() handlers on the react-smooth-scrollbar library instead of creating a separate onScroll Listneter to time the animations which significantly reduce the lag.",
+    focusDesignText: "Implemented a parallax effect through CSS properties and onScroll Listeners to make the website feel longer and wider with the purpose of further engaging the user. Took advantage of the contrast between bright and dark colors to create an “interactive” experience."
 }
 
 const Slide = React.forwardRef(function Slide(props, ref) {
@@ -60,33 +60,44 @@ const Slide = React.forwardRef(function Slide(props, ref) {
 });
 
 const Expcon = (props) => {
-    
+
     const [expModalOpen, setExpModalOpen] = React.useState(false);
+    const [initialRender, setInitialRender] = React.useState(true);
 
     const springFirst = useSpring({
         to: { transform: props.render ? `translateX(0%)` : `translateX(-150%)` },
         from: { transform: `translateX(-150%)`, zIndex: 5 },
         config: { duration: 800, easing: easings.easeCubicOut },
         delay: 300
-    })
+    });
 
     const springLine = useSpring({
         to: { transform: props.render ? `translateX(0rem)` : `translateX(-6.5rem)` },
         from: { width: "5.5rem", transform: `translateX(-6.5rem)`, zIndex: 5 },
         delay: 300
-    })
+    });
 
     const springLineMove = useSpring({
         to: { transform: props.render ? `translateX(0rem)` : `translateX(-9.5rem)` },
         from: { width: "5.5rem", transform: `translateX(-9.5rem)`, zIndex: 5 },
         delay: 500
-    })
+    });
 
     const springSecond = useSpring({
         to: { transform: props.render ? `translateX(0%)` : `translateX(-110%)` },
         from: { transform: `translateX(-110%)`, zIndex: 5 },
         delay: 600
-    })
+    });
+
+    React.useEffect(() => {
+        if (props.render) {
+            setTimeout(() => {
+                setInitialRender(false);
+            }, 100)
+        } else if (!props.render) {
+            setInitialRender(true);
+        }
+    }, [props.render]);
 
     const videoSpring = useSpring({
         to: {
@@ -98,21 +109,21 @@ const Expcon = (props) => {
             height: "70%", width: "54%", zIndex: 3
         },
         config: { duration: expModalOpen ? 600 : 1200, easing: easings.easeQuadOut },
-        delay: props.modalOpen ? 0 : 600
-    })
+        delay: initialRender ? 600 : 0
+    });
 
     const videoOverlay = useSpring({
         to: { width: props.render ? "0%" : "100%" },
         from: { position: "absolute", height: "100%", width: "100%", background: "linear-gradient(90deg, #ff4d5a 10%, #072142 20%)", zIndex: 2, right: "0" },
         config: { duration: 1000, easing: easings.easeQuadOut },
-        delay: 700
-    })
+        delay: 300
+    });
 
     const springThird = useSpring({
         to: { transform: props.render ? `translateX(0%)` : `translateX(-100%)`, opacity: props.render ? 1 : 0, right: expModalOpen ? "3%" : "-6.6%" },
         from: { right: "-6.6%", zIndex: 5, bottom: "8%", position: "absolute", transform: `translateX(-100%)`, opacity: 0 },
-        delay: expModalOpen ? 0 : 800
-    })
+        delay: props.modalOpen ? 0 : 600
+    });
 
     const handleClick = () => {
         props.setModalOpen(true);
