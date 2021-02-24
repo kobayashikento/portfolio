@@ -135,8 +135,8 @@ const aboutCode = [
 ]
 const codeSections = [
     { content: `PortfolioLandingPage` },
-    { content: `ExpconSection` },
     { content: `AboutSection` },
+    { content: `ExpconSection` },
     { content: `UAssistSection` },
     { content: `ContactSection` },
 ]
@@ -173,7 +173,7 @@ const Skeleton = (props) => {
                         }
                         setTimeout(() => {
                             setIndex((i) => clamp(i - s, 0, slides.length - 1))
-                        }, 200)
+                        }, 0)
                         return true
                     }
                 } else return false
@@ -203,7 +203,7 @@ const Skeleton = (props) => {
                 }, 0);
                 setTimeout(() => {
                     setLandingRender(true);
-                    setExpconRender(false);
+                    setAboutRender(false);
                 }, 0);
                 break;
             case 1:
@@ -212,12 +212,12 @@ const Skeleton = (props) => {
                     setClear(false);
                 }, 0);
                 setTimeout(() => {
-                    setExpconRender(true);
-                    setAboutRender(false);
+                    setAboutRender(true);
+                    setExpconRender(false);
+                    setLandingRender(false);
                     setLandingSVG(false);
                     setXYTypeDone(false);
                     setStateTypeDone(false);
-                    setLandingRender(false);
                 }, 0);
                 break;
             case 2:
@@ -226,8 +226,8 @@ const Skeleton = (props) => {
                     setClear(false);
                 }, 0);
                 setTimeout(() => {
-                    setAboutRender(true);
-                    setExpconRender(false);
+                    setExpconRender(true);
+                    setAboutRender(false);
                     setUassistRender(false);
                 }, 0);
                 break;
@@ -237,7 +237,7 @@ const Skeleton = (props) => {
                     setClear(false);
                 }, 0);
                 setTimeout(() => {
-                    setAboutRender(false);
+                    setExpconRender(false);
                     setUassistRender(true);
                     setContactRender(false);
                 }, 0);
@@ -276,7 +276,7 @@ const Skeleton = (props) => {
             return (
                 snippet.content === 'carouselState' ?
                     <div style={{ display: "flex" }}>
-                        <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }} onTypingDone={() => setStateTypeDone(true)}>
+                        <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }} onTypingDone={() => setStateTypeDone(true)}>
                             <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, }}>
                                 {`const [carouselIndex, setCarouselIndex] = React.useState(`}
                             </span>
@@ -290,7 +290,7 @@ const Skeleton = (props) => {
                     </div>
                     : snippet.content === 'xyConfig' ?
                         <div style={{ display: "flex" }}>
-                            <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }} onTypingDone={() => setXYTypeDone(true)}>
+                            <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }} onTypingDone={() => setXYTypeDone(true)}>
                                 <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, }}>
                                     {`{ xy: [`}
                                 </span>
@@ -304,7 +304,7 @@ const Skeleton = (props) => {
                         </div>
                         : snippet.content === 'setCarouselIndex' ?
                             <div style={{ color: "rgba(255,255,255,0.4)" }}>
-                                <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                                <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                                     <span style={{ marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                                         {`setCarouselIndex((carouselIndex + 1) % 3);`}
                                     </span>
@@ -312,7 +312,7 @@ const Skeleton = (props) => {
                             </div>
                             : snippet.content === 'trans1' ?
                                 <div style={{ color: carouselIndex === 0 ? "rgb(255, 77, 90)" : "rgba(255,255,255,0.4)" }}>
-                                    <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                                    <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                                         <span style={{ marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                                             {`<animated.div style={{ transform: prop.xy.interpolate(trans1)} />`}
                                         </span>
@@ -320,7 +320,7 @@ const Skeleton = (props) => {
                                 </div> :
                                 snippet.content === 'trans2' ?
                                     <div style={{ color: carouselIndex === 1 ? "rgb(255, 77, 90)" : "rgba(255,255,255,0.4)" }}>
-                                        <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                                        <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                                             <span style={{ marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                                                 {`<animated.div style={{ transform: prop.xy.interpolate(trans2)} />`}
                                             </span>
@@ -328,13 +328,13 @@ const Skeleton = (props) => {
                                     </div> :
                                     snippet.content === 'trans3' ?
                                         <div style={{ color: carouselIndex === 2 ? "rgb(255, 77, 90)" : "rgba(255,255,255,0.4)" }}>
-                                            <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                                            <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                                                 <span style={{ marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                                                     {`<animated.div style={{ transform: prop.xy.interpolate(trans3)} />`}
                                                 </span>
                                             </Typist>
                                         </div>
-                                        : <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                                        : <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                                             <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                                                 {snippet.content}
                                             </span>
@@ -345,7 +345,7 @@ const Skeleton = (props) => {
     const makeLandingPreCodeAni = () => {
         return precode.map((snippet, index) => {
             return (
-                <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                     <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                         {snippet.content}
                     </span>
@@ -356,7 +356,7 @@ const Skeleton = (props) => {
     const makeExconPreCodeAni = () => {
         return preexpcode.map((snippet, index) => {
             return (
-                <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                     <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                         {snippet.content}
                     </span>
@@ -368,7 +368,7 @@ const Skeleton = (props) => {
         return expcode.map((snippet, index) => {
             return (
                 snippet.content === `expcon` ?
-                    <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                    <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                         <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                             {`<Typography style={{ fontFamily: "FuturaM", fontSize: "5.2rem" }}>`}
                         </span>
@@ -379,7 +379,7 @@ const Skeleton = (props) => {
                             {`</Typography>`}
                         </span>
                     </Typist> : snippet.content === `website` ?
-                        <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                        <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                             <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                                 {`<Typography style={{ fontFamily: "FuturaB", fontSize: "1.5rem" }}>`}
                             </span>
@@ -390,7 +390,7 @@ const Skeleton = (props) => {
                                 {`</Typography>`}
                             </span>
                         </Typist> : snippet.content === `skills` ?
-                            <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                            <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                                 <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                                     {`<Typography>`}
                                 </span>
@@ -401,7 +401,7 @@ const Skeleton = (props) => {
                                     {`</Typography>`}
                                 </span>
                             </Typist>
-                            : <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                            : <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                                 <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                                     {snippet.content}
                                 </span>
@@ -413,24 +413,24 @@ const Skeleton = (props) => {
         return preaboutcode.map((snippet, index) => {
             return (
                 snippet.content === 'importPic' ?
-                    <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                    <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                         <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                             {`import `}
                         </span>
                         <span style={{ color: "rgb(255, 77, 90)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
-                            {currIndex === 2 ? `aboutPic` : currIndex === 3 ? `uAssistPic` : `torontoPic`}
+                            {currIndex === 1 ? `aboutPic` : currIndex === 3 ? `uAssistPic` : `torontoPic`}
                         </span>
                         <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                             {` from '../Assets/pictures/`}
                         </span>
                         <span style={{ color: "rgb(255, 77, 90)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
-                            {currIndex === 2 ? `about_pic` : currIndex === 3 ? `uAssist_pic` : `toronto_pic`}
+                            {currIndex === 1 ? `about_pic` : currIndex === 3 ? `uAssist_pic` : `toronto_pic`}
                         </span>
                         <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                             {`.png';`}
                         </span>
                     </Typist>
-                    : <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                    : <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                         <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                             {snippet.content}
                         </span>
@@ -442,46 +442,46 @@ const Skeleton = (props) => {
         return aboutCode.map((snippet, index) => {
             return (
                 snippet.content === `about` ?
-                    <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                    <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                         <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                             {`<Typography style={{ fontFamily: "FuturaM", fontSize: "5.2rem" }}>`}
                         </span>
                         <span style={{ color: "rgb(255, 77, 90)", whiteSpace: "pre" }}>
-                            {currIndex === 2 ? `About` : currIndex === 3 ? `UAssist` : `Get In Touch`}
+                            {currIndex === 1 ? `About` : currIndex === 3 ? `UAssist` : `Get In Touch`}
                         </span>
                         <span style={{ color: "rgba(255,255,255,0.4)", whiteSpace: "pre" }}>
                             {`</Typography>`}
                         </span>
                     </Typist> : snippet.content === `developer` ?
-                        <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                        <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                             <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                                 {`<Typography style={{ fontFamily: "FuturaB", fontSize: "1.5rem" }}>`}
                             </span>
                             <span style={{ color: "rgb(255, 77, 90)", whiteSpace: "pre" }}>
-                                {currIndex === 2 ? `Front-End Developer` : currIndex === 3 ? `website` : `Leave a message`}
+                                {currIndex === 1 ? `Front-End Developer` : currIndex === 3 ? `website` : `Leave a message`}
                             </span>
                             <span style={{ color: "rgba(255,255,255,0.4)", whiteSpace: "pre" }}>
                                 {`</Typography>`}
                             </span>
                         </Typist> : snippet.content === `uoft` ?
-                            <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                            <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                                 <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                                     {`<Typography>`}
                                 </span>
                                 <span style={{ color: "rgb(255, 77, 90)", whiteSpace: "pre" }}>
                                     {``}
-                                    {currIndex === 2 ? `U of T Grad: Mathematics and Statistics` : currIndex === 3 ? `MangoDB, Express, Bootstrap, JavaScript` : `Based in Toronto, Fueled by coffee :)`}
+                                    {currIndex === 1 ? `U of T Grad: Mathematics and Statistics` : currIndex === 3 ? `MangoDB, Express, Bootstrap, JavaScript` : `Based in Toronto, Fueled by coffee :)`}
                                 </span>
                                 <span style={{ color: "rgba(255,255,255,0.4)", whiteSpace: "pre" }}>
                                     {`</Typography>`}
                                 </span>
                             </Typist> : snippet.content === `02` ?
-                                <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                                <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                                     <span style={{ color: "rgb(255, 77, 90)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
-                                        {currIndex === 2 ? `02` : currIndex === 3 ? `03` : `04`}
+                                        {currIndex === 1 ? `01` : currIndex === 3 ? `03` : `04`}
                                     </span>
                                 </Typist>
-                                : <Typist avgTypingDelay={50} startDelay={100 * index} cursor={{ show: false }}>
+                                : <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                                     <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                                         {snippet.content}
                                     </span>
@@ -505,47 +505,47 @@ const Skeleton = (props) => {
                 position: "fixed", height: "100%", fontSize: "13px", width: "100%", display: "flex", justifyContent: "center", left: "36%", flexDirection: "column", overflow: "hidden",
                 fontFamily: "'Rajdhani', sans-serif", letterSpacing: "1.5px", fontWeight: "500", transform: prop.xy.interpolate(trans1)
             }}>
-                <Typist avgTypingDelay={50} startDelay={0} cursor={{ show: false }} >
+                <Typist avgTypingDelay={5} startDelay={0} cursor={{ show: false }} >
                     <span style={{ color: "rgba(255,255,255,0.4)" }}>
                         {`import React from 'react';`}
                     </span>
                 </Typist>
-                <Typist avgTypingDelay={50} startDelay={50} cursor={{ show: false }} >
+                <Typist avgTypingDelay={5} startDelay={50} cursor={{ show: false }} >
                     <span style={{ color: "rgba(255,255,255,0.4)" }}>
                         {`import { useSpring, animated } from 'react-spring';`}
                     </span>
                 </Typist>
-                {clear ? null : index === 1 ? makeExconPreCodeAni() : index === 0 ? makeLandingPreCodeAni() : makeAboutPreCodeAni(index)}
+                {clear ? null : index === 2 ? makeExconPreCodeAni() : index === 0 ? makeLandingPreCodeAni() : makeAboutPreCodeAni(index)}
                 <div style={{ display: "flex" }}>
-                    <Typist avgTypingDelay={50} startDelay={500} cursor={{ show: false }}>
+                    <Typist avgTypingDelay={5} startDelay={500} cursor={{ show: false }}>
                         <span style={{ marginLeft: `${1}rem`, whiteSpace: "pre", color: "rgba(255,255,255,0.4)" }}>
                             {`const `}
                         </span>
                     </Typist>
-                    {clear ? null : <Typist avgTypingDelay={50} startDelay={520} cursor={{ show: false }}>
+                    {clear ? null : <Typist avgTypingDelay={5} startDelay={520} cursor={{ show: false }}>
                         <span style={{ whiteSpace: "pre", color: "rgb(255, 77, 90)" }}>
                             {codeSections[index].content}
                         </span>
                     </Typist>}
-                    <Typist avgTypingDelay={50} startDelay={550} cursor={{ show: false }}>
+                    <Typist avgTypingDelay={5} startDelay={550} cursor={{ show: false }}>
                         <span style={{ whiteSpace: "pre", color: "rgba(255,255,255,0.4)" }}>
                             {` = (props) => {`}
                         </span>
                     </Typist>
                 </div>
-                {clear ? null : index === 1 ? makeExconCodeAni() : index === 0 ? makeLandingCodeAni() : makeAboutCodeAni(index)}
+                {clear ? null : index === 2 ? makeExconCodeAni() : index === 0 ? makeLandingCodeAni() : makeAboutCodeAni(index)}
                 <div style={{ display: "flex" }}>
-                    <Typist avgTypingDelay={50} startDelay={2500} cursor={{ show: false }}>
+                    <Typist avgTypingDelay={5} startDelay={2500} cursor={{ show: false }}>
                         <span style={{ marginLeft: `${0}rem`, whiteSpace: "pre", color: "rgba(255,255,255,0.4)" }}>
                             {`export default React.memo(`}
                         </span>
                     </Typist>
-                    {clear ? null : <Typist avgTypingDelay={50} startDelay={2520} cursor={{ show: false }}>
+                    {clear ? null : <Typist avgTypingDelay={5} startDelay={2520} cursor={{ show: false }}>
                         <span style={{ whiteSpace: "pre", color: "rgb(255, 77, 90)" }}>
                             {codeSections[index].content}
                         </span>
                     </Typist>}
-                    <Typist avgTypingDelay={50} startDelay={2550} cursor={{ show: true }}>
+                    <Typist avgTypingDelay={5} startDelay={2550} cursor={{ show: true }}>
                         <span style={{ whiteSpace: "pre", color: "rgba(255,255,255,0.4)" }}>
                             {`);`}
                         </span>
@@ -558,11 +558,11 @@ const Skeleton = (props) => {
                     svgRender={landingSVG}
                     carouselIndex={carouselIndex}
                 />
-                <Expcon
-                    render={expconRender}
-                />
                 <About
                     render={aboutRender}
+                />
+                <Expcon
+                    render={expconRender}
                 />
                 <UAssist
                     render={uassistRender}

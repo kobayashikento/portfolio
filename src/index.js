@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import './Assets/fonts/FuturaMedium.otf';
-import './Assets/fonts/FuturaBook.otf';
 
 ReactDOM.render(
   <React.StrictMode>

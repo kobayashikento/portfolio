@@ -293,7 +293,7 @@ const AboutMe = (props) => {
                                 className="vertical-timeline-element--work"
                                 contentStyle={{ background: 'rgba(7, 33, 66, 0.9)', color: '#fff' }}
                                 contentArrowStyle={{ borderRight: '7px solid  rgba(7, 33, 66, 0.9)' }}
-                                date="2019 - Present"
+                                date="2020 - Present"
                                 iconStyle={{ background: "white", color: 'rgba(7, 33, 66, 0.9)' }}
                                 icon={<WorkIcon />}
                             >

@@ -83,11 +83,11 @@ const About = (props) => {
 
     const videoSpring = useSpring({
         to: {
-            transform: props.render ? "scale(1) translate(0%, -50%)" : "scale(0.7) translate(10% ,-50%)", opacity: props.render ? 1 : 0,
+            transform: props.render ? "scale(1) translate(0%, -50%)" : "scale(0.6) translate(10% ,-50%)", opacity: props.render ? 1 : 0,
             height: aboutModalOpen ? "100%" : "70%", width: aboutModalOpen ? "66%" : "54%", right: aboutModalOpen ? "0%" : "8%"
         },
         from: { right: "8%", top: "50%", transform: "scale(0.6) translate(10% ,-50%)", transformOrigin: "top center 20px", opacity: 0, height: "70%", width: "54%", },
-        config: { duration: aboutModalOpen ? 600 : 1200, easing: easings.easeQuadOut },
+        config: { duration: aboutModalOpen ? 600 : 1500, easing: easings.easePolyOut.exponent(2.04)  },
         delay: initialRender ? 600 : 0
     });
 
@@ -150,13 +150,13 @@ const About = (props) => {
                 <animated.div style={springSecond}>
                     <Typography style={{
                         width: "max-content", color: "rgba(255,255,255,0.7)", fontFamily: "'Rajdhani', sans-serif", fontSize: "16px",
-                        letterSpacing: "1px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
+                        letterSpacing: "1.2px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
                     }}>
                         U of T Grad: Mathematics and Statistics
                     </Typography>
                 </animated.div>
                 <animated.div style={springSecond}>
-                    <button onClick={() => handleClick()} class="explore" style={{ fontFamily: "FuturaB", boxShadow: "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px" }}>More<span class="icon-right"></span><span class="icon-right after"></span></button>
+                    <button onClick={() => handleClick()} class="explore" style={{ fontFamily: "FuturaB", boxShadow: "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px" }}>More<span class="icon-right-more"></span><span class="icon-right-more after"></span></button>
                 </animated.div>
             </animated.div>
             <animated.div style={{ ...videoSpring, position: "absolute", boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px" }}>
@@ -166,7 +166,7 @@ const About = (props) => {
                     <Typography style={{
                         width: "max-content", color: "white", fontFamily: "'Abril Fatface', cursive", fontSize: "7rem", textShadow: "0 10px 30px rgb(2 11 22 / 50%)"
                     }}>
-                        02
+                        01
                     </Typography>
                 </animated.div>
             </animated.div>

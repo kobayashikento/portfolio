@@ -101,14 +101,14 @@ const Expcon = (props) => {
 
     const videoSpring = useSpring({
         to: {
-            transform: props.render ? "scale(1) translate(0%, -50%)" : "scale(0.7) translate(10% ,-50%)", opacity: props.render ? 1 : 0,
+            transform: props.render ? "scale(1) translate(0%, -50%)" : "scale(0.6) translate(10% ,-50%)", opacity: props.render ? 1 : 0,
             height: expModalOpen ? "100%" : "70%", width: expModalOpen ? "66%" : "54%", right: expModalOpen ? "0%" : "8%"
         },
         from: {
             right: "8%", top: "50%", transform: "scale(0.6) translate(10% ,-50%)", transformOrigin: "top center 20px", opacity: 0,
             height: "70%", width: "54%", zIndex: 3
         },
-        config: { duration: expModalOpen ? 600 : 1200, easing: easings.easeQuadOut },
+        config: { duration: expModalOpen ? 600 : 1500, easing: easings.easePolyOut.exponent(2.04) },
         delay: initialRender ? 600 : 0
     });
 
@@ -172,7 +172,7 @@ const Expcon = (props) => {
                     <animated.div style={springSecond}>
                         <Typography style={{
                             width: "max-content", color: "rgba(255,255,255,0.7)", fontFamily: "'Rajdhani', sans-serif", fontSize: "16px",
-                            letterSpacing: "1px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
+                            letterSpacing: "1.2px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
                         }}>
                             React, Firebase, Redux, JavaScript
                     </Typography>
@@ -200,7 +200,7 @@ const Expcon = (props) => {
                         <Typography style={{
                             width: "max-content", color: "white", fontFamily: "'Abril Fatface', cursive", fontSize: "7rem", textShadow: "0 10px 30px rgb(2 11 22 / 50%)"
                         }}>
-                            01
+                            02
                     </Typography>
                     </animated.div>
                 </animated.div>

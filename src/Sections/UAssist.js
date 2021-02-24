@@ -99,14 +99,14 @@ const UAssist = (props) => {
 
     const videoSpring = useSpring({
         to: {
-            transform: props.render ? "scale(1) translate(0%, -50%)" : "scale(0.7) translate(10% ,-50%)", opacity: props.render ? 1 : 0,
+            transform: props.render ? "scale(1) translate(0%, -50%)" : "scale(0.6) translate(10% ,-50%)", opacity: props.render ? 1 : 0,
             height: uaModalOpen ? "100%" : "70%", width: uaModalOpen ? "66%" : "54%", right: uaModalOpen ? "0%" : "8%"
         },
         from: {
             right: "8%", top: "50%", transform: "scale(0.6) translate(10% ,-50%)", transformOrigin: "top center 20px", opacity: 0,
             height: "70%", width: "54%", zIndex: 3
         },
-        config: { duration: uaModalOpen ? 600 : 1200, easing: easings.easeQuadOut },
+        config: { duration: uaModalOpen ? 600 : 1500, easing: easings.easePolyOut.exponent(2.04) },
         delay: !initialRender ? 0 : 600
     });
 
@@ -174,7 +174,7 @@ const UAssist = (props) => {
                 <animated.div style={springSecond}>
                     <Typography style={{
                         width: "max-content", color: "rgba(255,255,255,0.7)", fontFamily: "'Rajdhani', sans-serif", fontSize: "16px",
-                        letterSpacing: "1px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
+                        letterSpacing: "1.2px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
                     }}>
                         MangoDB, Express, Bootstrap, JavaScript
                     </Typography>
