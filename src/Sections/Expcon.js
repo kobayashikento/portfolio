@@ -163,7 +163,7 @@ const Expcon = (props) => {
                     </div>
                     <animated.div style={springSecond}>
                         <Typography style={{
-                            width: "max-content", color: "white", fontFamily: "FuturaB", fontSize: "1.5rem", letterSpacing: "0.2rem",
+                            width: "max-content", color: "white", fontFamily: "FuturaB", fontSize: "1.8rem", letterSpacing: "0.2rem",
                             marginTop: "4px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
                         }}>
                             website
@@ -171,8 +171,8 @@ const Expcon = (props) => {
                     </animated.div>
                     <animated.div style={springSecond}>
                         <Typography style={{
-                            width: "max-content", color: "rgba(255,255,255,0.7)", fontFamily: "'Rajdhani', sans-serif", fontSize: "16px",
-                            letterSpacing: "1.2px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
+                            width: "max-content", color: "rgba(255,255,255,0.7)", fontFamily: "FuturaM", fontSize: "16px",
+                            letterSpacing: "1.5px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
                         }}>
                             React, Firebase, Redux, JavaScript
                     </Typography>
