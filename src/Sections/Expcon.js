@@ -14,6 +14,8 @@ import '../Assets/styles/expconStyle.scss';
 
 import * as easings from 'd3-ease';
 
+import MobileContent from '../Components/MobileContent';
+
 import Modal from '@material-ui/core/Modal';
 import ProductInfo from '../Components/ProductInfo';
 
@@ -25,11 +27,13 @@ import longpic2 from '../Assets/pictures/expcon_long_2.png';
 import { connect } from 'react-redux';
 import { setModalOpen } from '../Redux/actions/propertyAction';
 
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 const content = {
     mockOverview: mockOverview, dutiesText: ["designer", "developer"], techText: ["React", "Redux", "JavaScript", "Material UI"],
     dateText: "Jan, 2021", overviewText: "A website that focuses on building an interactive online music experience.",
     mockAll: mockAll, detailsText: "This website was built using React and focuses heavily on engaging the viewers through the use of parallaxes and meaningful animations. I created functional components for sections that had similar layouts to reduce unnecessary code and used React Redux so that components would share global states to reduce client-side lags.",
-    longpic1: longpic1, longpic2: longpic2, mainPicWidth: "70%", 
+    longpic1: longpic1, longpic2: longpic2, mainPicWidth: "70%",
     focusDevText: "Learned WebGL and three.JS to build a  more interactive video transition for the landing page. In addition, I learned GSAP (GreenSock) to implement scrollTo() handlers on the react-smooth-scrollbar library instead of creating a separate onScroll Listneter to time the animations which significantly reduce the lag.",
     focusDesignText: "Implemented a parallax effect through CSS properties and onScroll Listeners to make the website feel longer and wider with the purpose of further engaging the user. Took advantage of the contrast between bright and dark colors to create an “interactive” experience."
 }
@@ -60,6 +64,8 @@ const Slide = React.forwardRef(function Slide(props, ref) {
 });
 
 const Expcon = (props) => {
+
+    const matches = useMediaQuery('(min-width:1200px)', { noSsr: true });
 
     const [expModalOpen, setExpModalOpen] = React.useState(false);
     const [initialRender, setInitialRender] = React.useState(true);
@@ -142,69 +148,79 @@ const Expcon = (props) => {
     }
 
     return (
-        <React.Fragment>
-            <div style={{ display: "flex", height: "100vh", position: "relative", width: "100vw" }}>
-                <animated.div style={{ overflow: "hidden", display: "flex", height: "100%", flexDirection: "column", marginLeft: "12.2vmax", justifyContent: "center", alignItems: "flex-start" }}>
-                    <animated.div style={springFirst}>
-                        <Typography style={{
-                            color: "white", fontFamily: "FuturaM", fontSize: "5.2rem",
-                            letterSpacing: "0.5rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.3)", fontWeight: "bold"
-                        }}>
-                            EXP|CON
+        <div style={{ display: "flex", height: "100vh", position: "relative", width: "100vw" }}>
+            {matches ?
+                <React.Fragment>
+                    <animated.div style={{ overflow: "hidden", display: "flex", height: "100%", flexDirection: "column", marginLeft: "12.2vmax", justifyContent: "center", alignItems: "flex-start" }}>
+                        <animated.div style={springFirst}>
+                            <Typography style={{
+                                color: "white", fontFamily: "FuturaM", fontSize: "5.2rem",
+                                letterSpacing: "0.5rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.3)", fontWeight: "bold"
+                            }}>
+                                EXP|CON
                 </Typography>
-                    </animated.div>
-                    <div style={{ overflow: "hidden", marginTop: "1%" }}>
-                        <animated.div style={springLine}>
-                            <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "0.5rem", marginTop: "0.7rem" }} />
                         </animated.div>
-                        <animated.div style={{ ...springLineMove, marginLeft: "3.3rem" }}>
-                            <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "1.2rem", marginTop: "0.7rem" }} />
+                        <div style={{ overflow: "hidden", marginTop: "1%" }}>
+                            <animated.div style={springLine}>
+                                <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "0.5rem", marginTop: "0.7rem" }} />
+                            </animated.div>
+                            <animated.div style={{ ...springLineMove, marginLeft: "3.3rem" }}>
+                                <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "1.2rem", marginTop: "0.7rem" }} />
+                            </animated.div>
+                        </div>
+                        <animated.div style={springSecond}>
+                            <Typography style={{
+                                width: "max-content", color: "white", fontFamily: "FuturaB", fontSize: "1.8rem", letterSpacing: "0.2rem",
+                                marginTop: "4px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
+                            }}>
+                                website
+                    </Typography>
                         </animated.div>
-                    </div>
-                    <animated.div style={springSecond}>
-                        <Typography style={{
-                            width: "max-content", color: "white", fontFamily: "FuturaB", fontSize: "1.8rem", letterSpacing: "0.2rem",
-                            marginTop: "4px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
-                        }}>
-                            website
+                        <animated.div style={springSecond}>
+                            <Typography style={{
+                                width: "max-content", color: "rgba(255,255,255,0.7)", fontFamily: "FuturaM", fontSize: "16px",
+                                letterSpacing: "1.5px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
+                            }}>
+                                React, Firebase, Redux, JavaScript
                     </Typography>
+                        </animated.div>
+                        <animated.div style={springSecond}>
+                            <button className="explore" onClick={() => handleClick()} style={{ fontFamily: "FuturaB", boxShadow: "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px" }}>
+                                Explore
+                            <span className="icon-right"></span>
+                                <span className="icon-right after"></span>
+                            </button>
+                        </animated.div>
                     </animated.div>
-                    <animated.div style={springSecond}>
-                        <Typography style={{
-                            width: "max-content", color: "rgba(255,255,255,0.7)", fontFamily: "FuturaM", fontSize: "16px",
-                            letterSpacing: "1.5px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
-                        }}>
-                            React, Firebase, Redux, JavaScript
+                    <animated.div style={{
+                        ...videoSpring, position: "absolute",
+                        boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
+                    }}>
+                        <animated.div style={videoOverlay} />
+                        <HoverVideoPlayer
+                            videoSrc={expconVid}
+                            sizingMode="container"
+                            style={{ width: "100%", height: "100%" }}
+                            pausedOverlay={<img src={pauseVideo} alt="" style={{ width: "100%", height: "100%", borderRadius: "2px" }} />}
+                        />
+                        <animated.div style={springThird}>
+                            <Typography style={{
+                                width: "max-content", color: "white", fontFamily: "'Abril Fatface', cursive", fontSize: "7rem", textShadow: "0 10px 30px rgb(2 11 22 / 50%)"
+                            }}>
+                                02
                     </Typography>
+                        </animated.div>
                     </animated.div>
-                    <animated.div style={springSecond}>
-                        <button class="explore" onClick={() => handleClick()} style={{ fontFamily: "FuturaB", boxShadow: "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px" }}>
-                            Explore
-                            <span class="icon-right"></span>
-                            <span class="icon-right after"></span>
-                        </button>
-                    </animated.div>
-                </animated.div>
-                <animated.div style={{
-                    ...videoSpring, position: "absolute",
-                    boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
-                }}>
-                    <animated.div style={videoOverlay} />
-                    <HoverVideoPlayer
-                        videoSrc={expconVid}
-                        sizingMode="container"
-                        style={{ width: "100%", height: "100%" }}
-                        pausedOverlay={<img src={pauseVideo} alt="" style={{ width: "100%", height: "100%", borderRadius: "2px" }} />}
-                    />
-                    <animated.div style={springThird}>
-                        <Typography style={{
-                            width: "max-content", color: "white", fontFamily: "'Abril Fatface', cursive", fontSize: "7rem", textShadow: "0 10px 30px rgb(2 11 22 / 50%)"
-                        }}>
-                            02
-                    </Typography>
-                    </animated.div>
-                </animated.div>
-            </div >
+                </React.Fragment>
+                :
+                <MobileContent
+                    contentModalOpen={expModalOpen}
+                    pic={pauseVideo}
+                    handleClick={() => handleClick()}
+                    render={props.render}
+                    content={{ title: "EXP|CON", subtitle: "website", description: "React, Firebase, Redux, JavaScript", number: "02" }}
+                />
+            }
             <Modal
                 open={expModalOpen}
                 onClose={handleEscape}
@@ -216,10 +232,11 @@ const Expcon = (props) => {
                     <ProductInfo
                         content={content}
                         picHeight={"68%"}
+                        handleEscape={() => handleEscape()}
                     />
                 </Slide>
             </Modal>
-        </React.Fragment>
+        </div >
     )
 }
 

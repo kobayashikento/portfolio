@@ -5,6 +5,8 @@ import Divider from '@material-ui/core/Divider';
 
 import { useSpring, animated } from 'react-spring'
 
+import MobileContent from '../Components/MobileContent';
+
 //Photo by AltumCode on Unsplash
 import aboutPic from '../Assets/pictures/about_pic.png';
 
@@ -15,6 +17,8 @@ import Modal from '@material-ui/core/Modal';
 import AboutMe from '../Components/AboutMe';
 
 import * as easings from 'd3-ease';
+
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const Slide = React.forwardRef(function Slide(props, ref) {
     const { in: open, children, onEnter, onExited, ...other } = props;
@@ -45,6 +49,8 @@ const About = (props) => {
 
     const [aboutModalOpen, setAboutModalOpen] = React.useState(false);
     const [initialRender, setInitialRender] = React.useState(true);
+
+    const matches = useMediaQuery('(min-width:1200px)', { noSsr: true });
 
     React.useEffect(() => {
         if (props.render) {
@@ -87,7 +93,7 @@ const About = (props) => {
             height: aboutModalOpen ? "100%" : "70%", width: aboutModalOpen ? "66%" : "54%", right: aboutModalOpen ? "0%" : "8%"
         },
         from: { right: "8%", top: "50%", transform: "scale(0.6) translate(10% ,-50%)", transformOrigin: "top center 20px", opacity: 0, height: "70%", width: "54%", },
-        config: { duration: aboutModalOpen ? 600 : 1500, easing: easings.easePolyOut.exponent(2.04)  },
+        config: { duration: aboutModalOpen ? 600 : 1500, easing: easings.easePolyOut.exponent(2.04) },
         delay: initialRender ? 600 : 0
     });
 
@@ -122,54 +128,67 @@ const About = (props) => {
 
     return (
         <div style={{ display: "flex", height: "100vh", position: "relative", width: "100vw" }}>
-            <animated.div style={{ overflow: "hidden", display: "flex", height: "100%", flexDirection: "column", marginLeft: "12.2vmax", justifyContent: "center", alignItems: "flex-start" }}>
-                <animated.div style={springFirst}>
-                    <Typography style={{
-                        color: "white", fontFamily: "FuturaM", fontSize: "5.2rem",
-                        letterSpacing: "0.5rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.3)", fontWeight: "bold"
-                    }}>
-                        About
+            {
+                matches ?
+                    <React.Fragment>
+                        <animated.div style={{ overflow: "hidden", display: "flex", height: "100%", flexDirection: "column", marginLeft: "12.2vmax", justifyContent: "center", alignItems: "flex-start" }}>
+                            <animated.div style={springFirst}>
+                                <Typography style={{
+                                    color: "white", fontFamily: "FuturaM", fontSize: "5.2rem",
+                                    letterSpacing: "0.5rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.3)", fontWeight: "bold"
+                                }}>
+                                    About
                 </Typography>
-                </animated.div>
-                <div style={{ overflow: "hidden", marginTop: "1%" }}>
-                    <animated.div style={springLine}>
-                        <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "0.5rem", marginTop: "0.7rem" }} />
-                    </animated.div>
-                    <animated.div style={{ ...springLineMove, marginLeft: "3.3rem" }}>
-                        <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "1.2rem", marginTop: "0.7rem" }} />
-                    </animated.div>
-                </div>
-                <animated.div style={springSecond}>
-                    <Typography style={{
-                        width: "max-content", color: "white", fontFamily: "FuturaB", fontSize: "1.8rem", letterSpacing: "0.2rem",
-                        marginTop: "4px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
-                    }}>
-                        front-end developer
+                            </animated.div>
+                            <div style={{ overflow: "hidden", marginTop: "1%" }}>
+                                <animated.div style={springLine}>
+                                    <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "0.5rem", marginTop: "0.7rem" }} />
+                                </animated.div>
+                                <animated.div style={{ ...springLineMove, marginLeft: "3.3rem" }}>
+                                    <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "1.2rem", marginTop: "0.7rem" }} />
+                                </animated.div>
+                            </div>
+                            <animated.div style={springSecond}>
+                                <Typography style={{
+                                    width: "max-content", color: "white", fontFamily: "FuturaB", fontSize: "1.8rem", letterSpacing: "0.2rem",
+                                    marginTop: "4px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
+                                }}>
+                                    front-end developer
                     </Typography>
-                </animated.div>
-                <animated.div style={springSecond}>
-                    <Typography style={{
-                        width: "max-content", color: "rgba(255,255,255,0.7)", fontFamily: "FuturaM", fontSize: "16px",
-                        letterSpacing: "1.5px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
-                    }}>
-                        U of T Grad: Mathematics and Statistics
+                            </animated.div>
+                            <animated.div style={springSecond}>
+                                <Typography style={{
+                                    width: "max-content", color: "rgba(255,255,255,0.7)", fontFamily: "FuturaM", fontSize: "16px",
+                                    letterSpacing: "1.5px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
+                                }}>
+                                    U of T Grad: Mathematics and Statistics
                     </Typography>
-                </animated.div>
-                <animated.div style={springSecond}>
-                    <button onClick={() => handleClick()} class="explore" style={{ fontFamily: "FuturaB", boxShadow: "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px" }}>More<span class="icon-right-more"></span><span class="icon-right-more after"></span></button>
-                </animated.div>
-            </animated.div>
-            <animated.div style={{ ...videoSpring, position: "absolute", boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px" }}>
-                <animated.div style={videoOverlay} />
-                <img src={aboutPic} style={{ height: "100%", width: "100%", borderRadius: "2px" }} />
-                <animated.div style={springThird}>
-                    <Typography style={{
-                        width: "max-content", color: "white", fontFamily: "'Abril Fatface', cursive", fontSize: "7rem", textShadow: "0 10px 30px rgb(2 11 22 / 50%)"
-                    }}>
-                        01
+                            </animated.div>
+                            <animated.div style={springSecond}>
+                                <button onClick={() => handleClick()} className="explore" style={{ fontFamily: "FuturaB", boxShadow: "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px" }}>More<span className="icon-right-more"></span><span className="icon-right-more after"></span></button>
+                            </animated.div>
+                        </animated.div>
+                        <animated.div style={{ ...videoSpring, position: "absolute", boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px" }}>
+                            <animated.div style={videoOverlay} />
+                            <img src={aboutPic} style={{ height: "100%", width: "100%", borderRadius: "2px" }} />
+                            <animated.div style={springThird}>
+                                <Typography style={{
+                                    width: "max-content", color: "white", fontFamily: "'Abril Fatface', cursive", fontSize: "7rem", textShadow: "0 10px 30px rgb(2 11 22 / 50%)"
+                                }}>
+                                    01
                     </Typography>
-                </animated.div>
-            </animated.div>
+                            </animated.div>
+                        </animated.div>
+                    </React.Fragment>
+                    :
+                    <MobileContent
+                        contentModalOpen={aboutModalOpen}
+                        pic={aboutPic}
+                        handleClick={() => handleClick()}
+                        render={props.render}
+                        content={{ title: "About", subtitle: "front-end developer", description: "U of T Grad: Mathematics and Statistics", number: "01" }}
+                    />
+            }
             <Modal
                 open={aboutModalOpen}
                 onClose={handleEscape}
@@ -179,6 +198,7 @@ const About = (props) => {
             >
                 <Slide in={aboutModalOpen}>
                     <AboutMe
+                        handleEscape={() => handleEscape()}
                     />
                 </Slide>
             </Modal>

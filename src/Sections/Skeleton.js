@@ -8,7 +8,7 @@ import About from './About';
 import UAssist from './UAssist';
 import Contact from './Contact';
 
-import { useGesture, useWheel } from 'react-use-gesture';
+import { useGesture } from 'react-use-gesture';
 
 import { Lethargy } from 'lethargy'
 
@@ -17,6 +17,8 @@ import '../Assets/styles/skeletonCSS.css';
 import { useSpring, animated } from 'react-spring';
 
 import { connect } from 'react-redux';
+
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 // import typing animation
 import Typist from 'react-typist';
@@ -146,6 +148,8 @@ const trans1 = (x, y) => `translate3d(${-x / 40}px,${-y / 40}px,0)`
 
 const Skeleton = (props) => {
 
+    const matches = useMediaQuery('(min-width:1200px)', { noSsr: true });
+
     const [clear, setClear] = React.useState(false);
     const [landingRender, setLandingRender] = React.useState(true);
     const [expconRender, setExpconRender] = React.useState(true);
@@ -180,6 +184,10 @@ const Skeleton = (props) => {
             } else {
                 return false
             }
+        },
+        onDrag: ({ swipe }) => {
+            if (props.modalOpen) { return }
+            else { setIndex(p => Math.min(Math.max(0, p - swipe[1]), 4)); }
         },
         onMove: ({ xy }) => {
             if (!props.modalOpen) {
@@ -501,57 +509,61 @@ const Skeleton = (props) => {
                 index={index}
                 handleNavClick={(index) => handleNavClick(index)}
             />
-            <animated.div style={{
-                position: "fixed", height: "100%", fontSize: "13px", width: "100%", display: "flex", justifyContent: "center", left: "36%", flexDirection: "column", overflow: "hidden",
-                fontFamily: "'Rajdhani', sans-serif", letterSpacing: "1.5px", fontWeight: "500", transform: prop.xy.interpolate(trans1)
-            }}>
-                <Typist avgTypingDelay={5} startDelay={0} cursor={{ show: false }} >
-                    <span style={{ color: "rgba(255,255,255,0.4)" }}>
-                        {`import React from 'react';`}
-                    </span>
-                </Typist>
-                <Typist avgTypingDelay={5} startDelay={50} cursor={{ show: false }} >
-                    <span style={{ color: "rgba(255,255,255,0.4)" }}>
-                        {`import { useSpring, animated } from 'react-spring';`}
-                    </span>
-                </Typist>
-                {clear ? null : index === 2 ? makeExconPreCodeAni() : index === 0 ? makeLandingPreCodeAni() : makeAboutPreCodeAni(index)}
-                <div style={{ display: "flex" }}>
-                    <Typist avgTypingDelay={5} startDelay={500} cursor={{ show: false }}>
-                        <span style={{ marginLeft: `${1}rem`, whiteSpace: "pre", color: "rgba(255,255,255,0.4)" }}>
-                            {`const `}
+            { matches ?
+                <animated.div style={{
+                    position: "fixed", height: "100%", fontSize: "13px", width: "100%", display: "flex", justifyContent: "center", left: "36%", flexDirection: "column", overflow: "hidden",
+                    fontFamily: "'Rajdhani', sans-serif", letterSpacing: "1.5px", fontWeight: "500", transform: prop.xy.interpolate(trans1)
+                }}>
+                    <Typist avgTypingDelay={5} startDelay={0} cursor={{ show: false }} >
+                        <span style={{ color: "rgba(255,255,255,0.4)" }}>
+                            {`import React from 'react';`}
                         </span>
                     </Typist>
-                    {clear ? null : <Typist avgTypingDelay={5} startDelay={520} cursor={{ show: false }}>
-                        <span style={{ whiteSpace: "pre", color: "rgb(255, 77, 90)" }}>
-                            {codeSections[index].content}
-                        </span>
-                    </Typist>}
-                    <Typist avgTypingDelay={5} startDelay={550} cursor={{ show: false }}>
-                        <span style={{ whiteSpace: "pre", color: "rgba(255,255,255,0.4)" }}>
-                            {` = (props) => {`}
+                    <Typist avgTypingDelay={5} startDelay={50} cursor={{ show: false }} >
+                        <span style={{ color: "rgba(255,255,255,0.4)" }}>
+                            {`import { useSpring, animated } from 'react-spring';`}
                         </span>
                     </Typist>
-                </div>
-                {clear ? null : index === 2 ? makeExconCodeAni() : index === 0 ? makeLandingCodeAni() : makeAboutCodeAni(index)}
-                <div style={{ display: "flex" }}>
-                    <Typist avgTypingDelay={5} startDelay={2500} cursor={{ show: false }}>
-                        <span style={{ marginLeft: `${0}rem`, whiteSpace: "pre", color: "rgba(255,255,255,0.4)" }}>
-                            {`export default React.memo(`}
-                        </span>
-                    </Typist>
-                    {clear ? null : <Typist avgTypingDelay={5} startDelay={2520} cursor={{ show: false }}>
-                        <span style={{ whiteSpace: "pre", color: "rgb(255, 77, 90)" }}>
-                            {codeSections[index].content}
-                        </span>
-                    </Typist>}
-                    <Typist avgTypingDelay={5} startDelay={2550} cursor={{ show: true }}>
-                        <span style={{ whiteSpace: "pre", color: "rgba(255,255,255,0.4)" }}>
-                            {`);`}
-                        </span>
-                    </Typist>
-                </div>
-            </animated.div>
+                    {clear ? null : index === 2 ? makeExconPreCodeAni() : index === 0 ? makeLandingPreCodeAni() : makeAboutPreCodeAni(index)}
+                    <div style={{ display: "flex" }}>
+                        <Typist avgTypingDelay={5} startDelay={500} cursor={{ show: false }}>
+                            <span style={{ marginLeft: `${1}rem`, whiteSpace: "pre", color: "rgba(255,255,255,0.4)" }}>
+                                {`const `}
+                            </span>
+                        </Typist>
+                        {clear ? null : <Typist avgTypingDelay={5} startDelay={520} cursor={{ show: false }}>
+                            <span style={{ whiteSpace: "pre", color: "rgb(255, 77, 90)" }}>
+                                {codeSections[index].content}
+                            </span>
+                        </Typist>}
+                        <Typist avgTypingDelay={5} startDelay={550} cursor={{ show: false }}>
+                            <span style={{ whiteSpace: "pre", color: "rgba(255,255,255,0.4)" }}>
+                                {` = (props) => {`}
+                            </span>
+                        </Typist>
+                    </div>
+                    {clear ? null : index === 2 ? makeExconCodeAni() : index === 0 ? makeLandingCodeAni() : makeAboutCodeAni(index)}
+                    <div style={{ display: "flex" }}>
+                        <Typist avgTypingDelay={5} startDelay={2500} cursor={{ show: false }}>
+                            <span style={{ marginLeft: `${0}rem`, whiteSpace: "pre", color: "rgba(255,255,255,0.4)" }}>
+                                {`export default React.memo(`}
+                            </span>
+                        </Typist>
+                        {clear ? null : <Typist avgTypingDelay={5} startDelay={2520} cursor={{ show: false }}>
+                            <span style={{ whiteSpace: "pre", color: "rgb(255, 77, 90)" }}>
+                                {codeSections[index].content}
+                            </span>
+                        </Typist>}
+                        <Typist avgTypingDelay={5} startDelay={2550} cursor={{ show: true }}>
+                            <span style={{ whiteSpace: "pre", color: "rgba(255,255,255,0.4)" }}>
+                                {`);`}
+                            </span>
+                        </Typist>
+                    </div>
+                </animated.div>
+                :
+                null
+            }
             <div className="slider" style={{ transform: `translateY(${-index * 100}vh)` }}>
                 <Landing
                     render={landingRender}

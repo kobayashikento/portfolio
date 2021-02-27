@@ -8,7 +8,6 @@ import { useSpring, animated } from 'react-spring';
 import Modal from '@material-ui/core/Modal';
 import ProductInfo from '../Components/ProductInfo';
 
-
 //Photo by AltumCode on Unsplash
 import uassistPic from '../Assets/pictures/uassist_pic.png';
 import uassistClearPic from '../Assets/pictures/uassist_clean.png';
@@ -18,8 +17,12 @@ import * as easings from 'd3-ease';
 import uaMainPic from '../Assets/pictures/ua_main_pic.png';
 import uaAllPic from '../Assets/pictures/ua_all_pic.png';
 
+import MobileContent from '../Components/MobileContent';
+
 import { connect } from 'react-redux';
 import { setModalOpen } from '../Redux/actions/propertyAction';
+
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const content = {
     mockOverview: uaMainPic, dutiesText: ["full-stack /", "developer"], techText: ["MongoDB", "Express", "JavaScript", "Bootstrap"],
@@ -56,6 +59,8 @@ const Slide = React.forwardRef(function Slide(props, ref) {
 });
 
 const UAssist = (props) => {
+
+    const matches = useMediaQuery('(min-width:1200px)', { noSsr: true });
 
     const [imageHover, setImageHover] = React.useState(false);
     const [uaModalOpen, setUaModalOpen] = React.useState(false);
@@ -146,62 +151,75 @@ const UAssist = (props) => {
 
     return (
         <div style={{ display: "flex", height: "100vh", position: "relative", width: "100vw" }}>
-            <animated.div style={{ overflow: "hidden", display: "flex", height: "100%", flexDirection: "column", marginLeft: "12.2vmax", justifyContent: "center", alignItems: "flex-start" }}>
-                <animated.div style={springFirst}>
-                    <Typography style={{
-                        color: "white", fontFamily: "FuturaM", fontSize: "5.2rem",
-                        letterSpacing: "0.5rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.3)", fontWeight: "bold"
-                    }}>
-                        UAssist
+            { matches ?
+                <React.Fragment>
+                    <animated.div style={{ overflow: "hidden", display: "flex", height: "100%", flexDirection: "column", marginLeft: "12.2vmax", justifyContent: "center", alignItems: "flex-start" }}>
+                        <animated.div style={springFirst}>
+                            <Typography style={{
+                                color: "white", fontFamily: "FuturaM", fontSize: "5.2rem",
+                                letterSpacing: "0.5rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.3)", fontWeight: "bold"
+                            }}>
+                                UAssist
+            </Typography>
+                        </animated.div>
+                        <div style={{ overflow: "hidden", marginTop: "1%" }}>
+                            <animated.div style={springLine}>
+                                <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "0.5rem", marginTop: "0.7rem" }} />
+                            </animated.div>
+                            <animated.div style={{ ...springLineMove, marginLeft: "3.3rem" }}>
+                                <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "1.2rem", marginTop: "0.7rem" }} />
+                            </animated.div>
+                        </div>
+                        <animated.div style={springSecond}>
+                            <Typography style={{
+                                width: "max-content", color: "white", fontFamily: "FuturaB", fontSize: "1.8rem", letterSpacing: "0.2rem",
+                                marginTop: "4px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
+                            }}>
+                                website
                 </Typography>
-                </animated.div>
-                <div style={{ overflow: "hidden", marginTop: "1%" }}>
-                    <animated.div style={springLine}>
-                        <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "0.5rem", marginTop: "0.7rem" }} />
+                        </animated.div>
+                        <animated.div style={springSecond}>
+                            <Typography style={{
+                                width: "max-content", color: "rgba(255,255,255,0.7)", fontFamily: "'FuturaM", fontSize: "16px",
+                                letterSpacing: "1.5px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
+                            }}>
+                                MongoDB, Express, Bootstrap, JavaScript
+                </Typography>
+                        </animated.div>
+                        <animated.div style={springSecond}>
+                            <button onClick={() => handleClick()}
+                                className="explore" style={{ fontFamily: "FuturaB", boxShadow: "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px" }}>Explore<span className="icon-right"></span><span className="icon-right after"></span></button>
+                        </animated.div>
                     </animated.div>
-                    <animated.div style={{ ...springLineMove, marginLeft: "3.3rem" }}>
-                        <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "1.2rem", marginTop: "0.7rem" }} />
+                    <animated.div
+                        style={{
+                            ...videoSpring, position: "absolute",
+                            boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
+                        }}>
+                        <animated.div style={videoOverlay} />
+                        <img src={uassistClearPic} style={{ height: "100%", width: "100%", borderRadius: "2px", position: "absolute" }} />
+                        <animated.div style={imageHoverSpring} onMouseEnter={() => setImageHover(true)} onMouseLeave={() => setImageHover(false)}>
+                            <img src={uassistPic} style={{ height: "100%", width: "100%", borderRadius: "2px", position: "absolute" }} />
+                        </animated.div>
+                        <animated.div style={springThird}>
+                            <Typography style={{
+                                width: "max-content", color: "white", fontFamily: "'Abril Fatface', cursive", fontSize: "7rem", textShadow: "0 10px 30px rgb(2 11 22 / 50%)"
+                            }}>
+                                03
+                </Typography>
+                        </animated.div>
                     </animated.div>
-                </div>
-                <animated.div style={springSecond}>
-                    <Typography style={{
-                        width: "max-content", color: "white", fontFamily: "FuturaB", fontSize: "1.8rem", letterSpacing: "0.2rem",
-                        marginTop: "4px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
-                    }}>
-                        website
-                    </Typography>
-                </animated.div>
-                <animated.div style={springSecond}>
-                    <Typography style={{
-                        width: "max-content", color: "rgba(255,255,255,0.7)", fontFamily: "'FuturaM", fontSize: "16px",
-                        letterSpacing: "1.5px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
-                    }}>
-                        MongoDB, Express, Bootstrap, JavaScript
-                    </Typography>
-                </animated.div>
-                <animated.div style={springSecond}>
-                    <button onClick={() => handleClick()}
-                        class="explore" style={{ fontFamily: "FuturaB", boxShadow: "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px" }}>Explore<span class="icon-right"></span><span class="icon-right after"></span></button>
-                </animated.div>
-            </animated.div>
-            <animated.div
-                style={{
-                    ...videoSpring, position: "absolute",
-                    boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
-                }}>
-                <animated.div style={videoOverlay} />
-                <img src={uassistClearPic} style={{ height: "100%", width: "100%", borderRadius: "2px", position: "absolute" }} />
-                <animated.div style={imageHoverSpring} onMouseEnter={() => setImageHover(true)} onMouseLeave={() => setImageHover(false)}>
-                    <img src={uassistPic} style={{ height: "100%", width: "100%", borderRadius: "2px", position: "absolute" }} />
-                </animated.div>
-                <animated.div style={springThird}>
-                    <Typography style={{
-                        width: "max-content", color: "white", fontFamily: "'Abril Fatface', cursive", fontSize: "7rem", textShadow: "0 10px 30px rgb(2 11 22 / 50%)"
-                    }}>
-                        03
-                    </Typography>
-                </animated.div>
-            </animated.div>
+                </React.Fragment>
+                :
+                <MobileContent
+                    contentModalOpen={uaModalOpen}
+                    pic={uassistPic}
+                    handleClick={() => handleClick()}
+                    render={props.render}
+                    content={{ title: "UAssist", subtitle: "website", description: "MongoDB, Express, Bootstrap, JavaScript", number: "03" }}
+                />
+            }
+
             <Modal
                 open={uaModalOpen}
                 onClose={handleEscape}
@@ -213,6 +231,7 @@ const UAssist = (props) => {
                     <ProductInfo
                         content={content}
                         picHeight={"68%"}
+                        handleEscape={() => handleEscape()}
                     />
                 </Slide>
             </Modal>

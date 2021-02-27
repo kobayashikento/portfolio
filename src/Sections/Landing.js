@@ -23,6 +23,8 @@ import '../Assets/styles/landingStyle.scss';
 
 import * as easings from 'd3-ease';
 
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]
 const trans1 = (x, y) => `translate3d(${x / 50 + 15}px,${y / 50}px,0)`
 const trans2 = (x, y) => `translate3d(${x / 8 + 35}px,${y / 8 - 130}px,0)`
@@ -33,6 +35,8 @@ const trans6 = (x, y) => `translate3d(${x / 8 + 10}px,${y / 8 - 10}px,0)`
 const trans7 = (x, y) => `translate3d(${x / 6 - 10}px,${y / 6 - 10}px,0)`
 
 const Landing = (props) => {
+
+    const matches = useMediaQuery('(min-width:1200px)', { noSsr: true });
 
     let browser_coding_ref = React.useRef(null);
     let coding_curly_ref = React.useRef(null);
@@ -194,114 +198,207 @@ const Landing = (props) => {
     })
 
     return (
-        <div style={{ display: "flex", height: "100vh", width: "100vw", position: "relative", justifyContent: "center" }} onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
-            <animated.div style={{
-                overflow: "hidden", display: "flex", height: "100%",
-                flexDirection: "column", width: "100%", justifyContent: "center", alignItems: "flex-start", marginLeft: "12.2vmax"
-            }}>
-                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", zIndex: 100 }}>
-                    <animated.div style={{ overflow: "hidden", transform: prop.xy.interpolate(trans1) }}>
-                        <animated.div style={springFirstText}>
-                            <Typography style={{
-                                color: "white", fontFamily: "FuturaM", fontSize: "calc(80px + (88 - 80) * ((100vw - 300px) / (1600 - 300)))",
-                                letterSpacing: "0.7rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)", fontWeight: "bold"
-                            }}>
-                                KENTO
-                    </Typography>
+        <React.Fragment>
+            {
+                matches ?
+                    <div style={{ display: "flex", height: "100vh", width: "100vw", position: "relative", justifyContent: "center" }} onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
+                        <animated.div style={{
+                            overflow: "hidden", display: "flex", height: "100%",
+                            flexDirection: "column", width: "100%", justifyContent: "center", alignItems: "flex-start", marginLeft: "12.2vmax"
+                        }}>
+                            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", zIndex: 100 }}>
+                                <animated.div style={{ overflow: "hidden", transform: prop.xy.interpolate(trans1) }}>
+                                    <animated.div style={springFirstText}>
+                                        <Typography style={{
+                                            color: "white", fontFamily: "FuturaM", fontSize: "calc(80px + (88 - 80) * ((100vw - 300px) / (1600 - 300)))",
+                                            letterSpacing: "0.7rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)", fontWeight: "bold"
+                                        }}>
+                                            KENTO
+                        </Typography>
+                                    </animated.div>
+                                </animated.div>
+                                <animated.div style={{ overflow: "hidden", transform: prop.xy.interpolate(trans1) }}>
+                                    <animated.div style={springSecondText}>
+                                        <Typography style={{
+                                            color: "white", fontFamily: "FuturaM", fontSize: "calc(80px + (88 - 80) * ((100vw - 300px) / (1600 - 300)))",
+                                            letterSpacing: "0.7rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)", fontWeight: "bold"
+                                        }}>
+                                            KOBAYASHI
+                        </Typography>
+                                    </animated.div>
+                                </animated.div>
+                            </div>
+                            <div style={{ overflow: "hidden", marginTop: "1%" }}>
+                                <animated.div style={springLine}>
+                                    <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "0.5rem", marginTop: "0.7rem" }} />
+                                </animated.div>
+                                <animated.div style={{ ...springLineMove, marginLeft: "3.3rem" }}>
+                                    <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "1.2rem", marginTop: "0.7rem" }} />
+                                </animated.div>
+                            </div>
+                            <div style={{ display: "flex", marginTop: "1%", overflow: "hidden" }}>
+                                <div style={{ overflow: "hidden" }}>
+                                    <animated.div style={springSecond}>
+                                        <Typography style={{ color: "white", fontFamily: "'Rajdhani', sans-serif", fontWeight: "500", fontSize: "1.5rem", letterSpacing: "0.5rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)" }}>
+                                            developer
+                        </Typography>
+                                    </animated.div>
+                                </div>
+                                <animated.div style={{ ...springHorizontalLineMove }}>
+                                    <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "0.5rem", marginTop: "0.7rem" }} />
+                                </animated.div>
+                                <div style={{ overflow: "hidden" }}>
+                                    <animated.div style={{ ...springSecond, marginLeft: "1.1rem" }}>
+                                        <Typography style={{ width: "max-content", color: "white", fontFamily: "FuturaB", fontSize: "1.5rem", letterSpacing: "0.5rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)" }}>
+                                            designer
+                        </Typography>
+                                    </animated.div>
+                                </div>
+                            </div>
                         </animated.div>
-                    </animated.div>
-                    <animated.div style={{ overflow: "hidden", transform: prop.xy.interpolate(trans1) }}>
-                        <animated.div style={springSecondText}>
-                            <Typography style={{
-                                color: "white", fontFamily: "FuturaM", fontSize: "calc(80px + (88 - 80) * ((100vw - 300px) / (1600 - 300)))",
-                                letterSpacing: "0.7rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)", fontWeight: "bold"
-                            }}>
-                                KOBAYASHI
-                    </Typography>
-                        </animated.div>
-                    </animated.div>
-                </div>
-                <div style={{ overflow: "hidden", marginTop: "1%" }}>
-                    <animated.div style={springLine}>
-                        <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "0.5rem", marginTop: "0.7rem" }} />
-                    </animated.div>
-                    <animated.div style={{ ...springLineMove, marginLeft: "3.3rem" }}>
-                        <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "1.2rem", marginTop: "0.7rem" }} />
-                    </animated.div>
-                </div>
-                <div style={{ display: "flex", marginTop: "1%", overflow: "hidden" }}>
-                    <div style={{ overflow: "hidden" }}>
-                        <animated.div style={springSecond}>
-                            <Typography style={{ color: "white", fontFamily: "'Rajdhani', sans-serif", fontWeight: "500", fontSize: "1.5rem", letterSpacing: "0.5rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)" }}>
-                                developer
-                    </Typography>
-                        </animated.div>
-                    </div>
-                    <animated.div style={{ ...springHorizontalLineMove }}>
-                        <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "0.5rem", marginTop: "0.7rem" }} />
-                    </animated.div>
-                    <div style={{ overflow: "hidden" }}>
-                        <animated.div style={{ ...springSecond, marginLeft: "1.1rem" }}>
-                            <Typography style={{ width: "max-content", color: "white", fontFamily: "FuturaB", fontSize: "1.5rem", letterSpacing: "0.5rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)" }}>
-                                designer
-                    </Typography>
-                        </animated.div>
-                    </div>
-                </div>
-            </animated.div>
-            <div style={{
-                display: "flex", width: "40vw", height: "100vh", alignItems: "center", position: "absolute",
-                right: "0%", zIndex: -1, marginTop: "10%"
-            }}>
-                <animated.div style={{ ...carouselCodeSprings, zIndex: 2 }}>
-                    <animated.div style={{ transform: prop.xy.interpolate(trans2), position: "absolute", zIndex: 10 }} ref={browser_coding_ref}>
-                    </animated.div>
-                    <animated.div style={{ transform: prop.xy.interpolate(trans3), position: "absolute", zIndex: 10 }} ref={coding_curly_ref}>
-                    </animated.div>
-                    <animated.div className={startBlink ? "blink" : ""} style={{ transform: prop.xy.interpolate(trans3), position: "absolute", zIndex: 10 }} ref={coding_curly_blink_ref}>
-                    </animated.div>
-                </animated.div>
-                <animated.div style={{ ...carouselDesignSprings, zIndex: 2 }}>
-                    <animated.div style={{ transform: prop.xy.interpolate(trans7), position: "absolute", zIndex: 10 }} ref={web_design_ref} >
-                    </animated.div>
-                    <animated.div style={{ transform: prop.xy.interpolate(trans7), position: "absolute", overflow: "hidden", zIndex: 10 }} ref={web_design_sun_container_ref}>
-                        <animated.div className="rotate" style={{ transform: prop.xy.interpolate(trans6), position: "absolute", zIndex: 10 }}
-                            ref={web_design_sun_ref} >
-                        </animated.div>
-                    </animated.div>
-                    <animated.div style={{ transform: prop.xy.interpolate(trans5), position: "absolute", overflow: "hidden", zIndex: 10 }} ref={web_design_txt_ref}>
-                    </animated.div>
-                    <animated.div className={props.carouselIndex === 1 ? "" : ""} style={{ transform: prop.xy.interpolate(trans6), position: "absolute", zIndex: 10 }} ref={web_design_arrow_ref} >
-                    </animated.div>
-                </animated.div>
-                <animated.div style={{ ...carouselMobileSprings, zIndex: 2 }}>
-                    <animated.div style={{ transform: prop.xy.interpolate(trans7), position: "absolute", zIndex: 10 }} ref={application_dev_ref} >
-                    </animated.div>
-                    <animated.div style={{ transform: prop.xy.interpolate(trans5), position: "absolute", zIndex: 10 }} ref={application_dev_code_ref}>
-                    </animated.div>
-                </animated.div>
-            </div>
-            <animated.div onMouseEnter={() => onHover(true)} onMouseLeave={() => onHover(false)} onClick={() => props.setHeroLeave(true)}
-                style={{ position: 'absolute', bottom: "0px", left: "3%", zIndex: 5, ...springThird, cursor: "pointer" }}>
-                <animated.div style={aniSpring}>
-                    <Typography style={{
-                        textAlign: "left", fontSize: `16px`, fontStyle: "normal",
-                        ontFamily: "FuturaM", color: "white", transformOrigin: "bottom",
-                    }}>
-                        scroll
-</Typography>
-                </animated.div>
-                <animated.div style={barSpring}>
-                    <div className="loading_line_wrapper" >
-                        <div className="loading_line">
-                            <div className="loading_line_inner loading_line_inner--1"></div>
-                            <div className="loading_line_inner loading_line_inner--2"></div>
+                        <div style={{
+                            display: "flex", width: "40vw", height: "100vh", alignItems: "center", position: "absolute",
+                            right: "0%", zIndex: -1, marginTop: "10%"
+                        }}>
+                            <animated.div style={{ ...carouselCodeSprings, zIndex: 2 }}>
+                                <animated.div style={{ transform: prop.xy.interpolate(trans2), position: "absolute", zIndex: 10 }} ref={browser_coding_ref}>
+                                </animated.div>
+                                <animated.div style={{ transform: prop.xy.interpolate(trans3), position: "absolute", zIndex: 10 }} ref={coding_curly_ref}>
+                                </animated.div>
+                                <animated.div className={startBlink ? "blink" : ""} style={{ transform: prop.xy.interpolate(trans3), position: "absolute", zIndex: 10 }} ref={coding_curly_blink_ref}>
+                                </animated.div>
+                            </animated.div>
+                            <animated.div style={{ ...carouselDesignSprings, zIndex: 2 }}>
+                                <animated.div style={{ transform: prop.xy.interpolate(trans7), position: "absolute", zIndex: 10 }} ref={web_design_ref} >
+                                </animated.div>
+                                <animated.div style={{ transform: prop.xy.interpolate(trans7), position: "absolute", overflow: "hidden", zIndex: 10 }} ref={web_design_sun_container_ref}>
+                                    <animated.div className="rotate" style={{ transform: prop.xy.interpolate(trans6), position: "absolute", zIndex: 10 }}
+                                        ref={web_design_sun_ref} >
+                                    </animated.div>
+                                </animated.div>
+                                <animated.div style={{ transform: prop.xy.interpolate(trans5), position: "absolute", overflow: "hidden", zIndex: 10 }} ref={web_design_txt_ref}>
+                                </animated.div>
+                                <animated.div className={props.carouselIndex === 1 ? "" : ""} style={{ transform: prop.xy.interpolate(trans6), position: "absolute", zIndex: 10 }} ref={web_design_arrow_ref} >
+                                </animated.div>
+                            </animated.div>
+                            <animated.div style={{ ...carouselMobileSprings, zIndex: 2 }}>
+                                <animated.div style={{ transform: prop.xy.interpolate(trans7), position: "absolute", zIndex: 10 }} ref={application_dev_ref} >
+                                </animated.div>
+                                <animated.div style={{ transform: prop.xy.interpolate(trans5), position: "absolute", zIndex: 10 }} ref={application_dev_code_ref}>
+                                </animated.div>
+                            </animated.div>
                         </div>
-                    </div>
-                    <div style={{ height: "65px", background: "#333", width: "2px" }} />
-                </animated.div>
-            </animated.div>
-        </div >
+                        <animated.div 
+                            style={{ position: 'absolute', bottom: "0px", left: "3%", zIndex: 5, ...springThird, cursor: "pointer" }}>
+                            <animated.div style={aniSpring}>
+                                <Typography style={{
+                                    textAlign: "left", fontSize: `16px`, fontStyle: "normal",
+                                    ontFamily: "FuturaM", color: "white", transformOrigin: "bottom",
+                                }}>
+                                    scroll
+    </Typography>
+                            </animated.div>
+                            <animated.div style={barSpring}>
+                                <div className="loading_line_wrapper" >
+                                    <div className="loading_line">
+                                        <div className="loading_line_inner loading_line_inner--1"></div>
+                                        <div className="loading_line_inner loading_line_inner--2"></div>
+                                    </div>
+                                </div>
+                                <div style={{ height: "65px", background: "#333", width: "2px" }} />
+                            </animated.div>
+                        </animated.div>
+                    </div >
+                    :
+                    <div style={{ display: "flex", height: "100vh", width: "100vw", position: "relative", justifyContent: "center" }} onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>
+                        <animated.div style={{
+                            display: "flex", flexDirection: "column", width: "100%", justifyContent: "center", alignItems: "center", marginBottom: "4.4vmax"
+                        }}>
+                            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", zIndex: 100 }}>
+                                <animated.div style={{ overflow: "hidden", transform: prop.xy.interpolate(trans1) }}>
+                                    <animated.div style={springFirstText}>
+                                        <Typography style={{
+                                            color: "white", fontFamily: "FuturaM", letterSpacing: "0.7rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)", fontWeight: "bold",
+                                            fontSize: "calc(32px + (44 - 32) * ((100vw - 300px) / (1200 - 300)))"
+                                        }}>
+                                            KENTO
+                    </Typography>
+                                    </animated.div>
+                                </animated.div>
+                                <animated.div style={{ overflow: "hidden", transform: prop.xy.interpolate(trans1) }}>
+                                    <animated.div style={springSecondText}>
+                                        <Typography style={{
+                                            color: "white", fontFamily: "FuturaM", letterSpacing: "0.7rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)", fontWeight: "bold",
+                                            fontSize: "calc(32px + (44 - 32) * ((100vw - 300px) / (1200 - 300)))"
+                                        }}>
+                                            KOBAYASHI
+                    </Typography>
+                                    </animated.div>
+                                </animated.div>
+                            </div>
+                            <div style={{ overflow: "hidden", marginTop: "1%" }}>
+                                <animated.div style={springLine}>
+                                    <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "0.5rem", marginTop: "0.7rem" }} />
+                                </animated.div>
+                                <animated.div style={{ ...springLineMove, marginLeft: "3.3rem" }}>
+                                    <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "1.2rem", marginTop: "0.7rem" }} />
+                                </animated.div>
+                            </div>
+                            <div style={{ display: "flex", marginTop: "1%" }}>
+                                <div style={{ overflow: "hidden" }}>
+                                    <animated.div style={springSecond}>
+                                        <Typography style={{ color: "white", fontFamily: "'Rajdhani', sans-serif", fontWeight: "500", fontSize: "1rem", letterSpacing: "0.5rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)" }}>
+                                            developer
+                    </Typography>
+                                    </animated.div>
+                                </div>
+                                <animated.div style={{ ...springHorizontalLineMove }}>
+                                    <Divider style={{ height: "5px", background: "#ff4d5a", borderRadius: "4px", marginBottom: "0.5rem", marginTop: "0.7rem" }} />
+                                </animated.div>
+                                <div style={{ overflow: "hidden" }}>
+                                    <animated.div style={{ ...springSecond, marginLeft: "0.4rem" }}>
+                                        <Typography style={{ width: "max-content", color: "white", fontFamily: "FuturaB", fontSize: "1rem", letterSpacing: "0.5rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)" }}>
+                                            designer
+                    </Typography>
+                                    </animated.div>
+                                </div>
+                            </div>
+                        </animated.div>
+                        <div style={{
+                            display: "none", width: "100%", height: "20%", position: "absolute", zIndex: -1, bottom: "0px"
+                        }}>
+                            <animated.div style={{ ...carouselCodeSprings, zIndex: 2 }}>
+                                <animated.div style={{ transform: prop.xy.interpolate(trans2), position: "absolute", zIndex: 10 }} ref={browser_coding_ref}>
+                                </animated.div>
+                                <animated.div style={{ transform: prop.xy.interpolate(trans3), position: "absolute", zIndex: 10 }} ref={coding_curly_ref}>
+                                </animated.div>
+                                <animated.div className={startBlink ? "blink" : ""} style={{ transform: prop.xy.interpolate(trans3), position: "absolute", zIndex: 10 }} ref={coding_curly_blink_ref}>
+                                </animated.div>
+                            </animated.div>
+                            <animated.div style={{ ...carouselDesignSprings, zIndex: 2 }}>
+                                <animated.div style={{ transform: prop.xy.interpolate(trans7), position: "absolute", zIndex: 10 }} ref={web_design_ref} >
+                                </animated.div>
+                                <animated.div style={{ transform: prop.xy.interpolate(trans7), position: "absolute", overflow: "hidden", zIndex: 10 }} ref={web_design_sun_container_ref}>
+                                    <animated.div className="rotate" style={{ transform: prop.xy.interpolate(trans6), position: "absolute", zIndex: 10 }}
+                                        ref={web_design_sun_ref} >
+                                    </animated.div>
+                                </animated.div>
+                                <animated.div style={{ transform: prop.xy.interpolate(trans5), position: "absolute", overflow: "hidden", zIndex: 10 }} ref={web_design_txt_ref}>
+                                </animated.div>
+                                <animated.div className={props.carouselIndex === 1 ? "" : ""} style={{ transform: prop.xy.interpolate(trans6), position: "absolute", zIndex: 10 }} ref={web_design_arrow_ref} >
+                                </animated.div>
+                            </animated.div>
+                            <animated.div style={{ ...carouselMobileSprings, zIndex: 2 }}>
+                                <animated.div style={{ transform: prop.xy.interpolate(trans7), position: "absolute", zIndex: 10 }} ref={application_dev_ref} >
+                                </animated.div>
+                                <animated.div style={{ transform: prop.xy.interpolate(trans5), position: "absolute", zIndex: 10 }} ref={application_dev_code_ref}>
+                                </animated.div>
+                            </animated.div>
+                        </div>
+                    </div >
+            }
+        </React.Fragment>
+
     )
 }
 

@@ -33,3 +33,7 @@
 .vertical-timeline-element-content .vertical-timeline-element-date {
     color: rgba(7, 33, 66, 0.9);
 }
+
+#mobile-timeline > div > span {
+    color: rgb(255, 255, 255);
+}
