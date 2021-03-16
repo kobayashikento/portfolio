@@ -13,6 +13,7 @@ import UseAnimations from 'react-useanimations';
 import menu2 from 'react-useanimations/lib/menu2';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Spring } from 'react-spring/renderprops-universal';
 
 const Trail = ({ open, delay, children, ...props }) => {
     const items = React.Children.toArray(children)
@@ -70,35 +71,8 @@ const SideNav = (props) => {
 
     const matches = useMediaQuery('(min-width:1200px)', { noSsr: true });
 
-    const springFirst = useSpring({
-        to: { width: props.index === 0 ? `4rem` : props.index === 1 ? `2rem` : "1.5rem", transform: props.modalOpen ? "translateY(54px)" : "translateY(0px)", opacity: props.modalOpen ? 0 : 1 },
-        from: { width: `1.5rem`, transform: "translateY(0px)", opacity: 1 },
-        duration: 400,
-    });
-
-    const springSecond = useSpring({
-        to: { width: props.index === 1 ? `4rem` : props.index === 0 ? "2rem" : props.index === 2 ? "2rem" : `1.5rem`, transform: props.modalOpen ? "translateY(27px)" : "translateY(0px)", opacity: props.modalOpen ? 0 : 1 },
-        from: { width: `1.5rem`, transform: "translateY(0px)", opacity: 1 },
-        duration: 400,
-    });
-
-    const springThird = useSpring({
-        to: { width: props.index === 2 ? `4rem` : props.index === 1 ? `2rem` : props.index === 3 ? "2rem" : `1.5rem`, opacity: props.modalOpen ? 0 : 1 },
-        from: { width: `1.5rem`, opacity: 1 },
-        duration: 400,
-    });
-
-    const springForth = useSpring({
-        to: { width: props.index === 3 ? `4rem` : props.index === 2 ? "2rem" : props.index === 4 ? "2rem" : `1.5rem`, transform: props.modalOpen ? "translateY(-27px)" : "translateY(0px)", opacity: props.modalOpen ? 0 : 1 },
-        from: { width: `1.5rem`, transform: "translateY(0px)", opacity: 1 },
-        duration: 400,
-    });
-
-    const springFifth = useSpring({
-        to: { width: props.index === 4 ? `4rem` : props.index === 3 ? "2rem" : `1.5rem`, transform: props.modalOpen ? "translateY(-54px)" : "translateY(0px)", opacity: props.modalOpen ? 0 : 1 },
-        from: { width: `1.5rem`, transform: "translateY(0px)", opacity: 1 },
-        duration: 400,
-    });
+    //states 
+    const [openModal, setOpenModal] = React.useState(false);
 
     const springCancel1 = useSpring({
         to: { opacity: props.modalOpen ? 1 : 0, transform: props.modalOpen ? "translateY(16px) rotate(135deg)" : "translateY(16px) rotate(0deg)", zIndex: props.modalOpen ? 2000 : -1 },
@@ -121,16 +95,10 @@ const SideNav = (props) => {
         }
     }
 
-    const sideBarAni = useSpring({
-        from: { transform: "translateX(-100%)" },
-        to: { transform: "translateX(0%)" }
-    })
 
     const handleCancel = () => {
         props.setModalOpen(false);
     }
-
-    const [openModal, setOpenModal] = React.useState(false);
 
     const springScrollBar = useSpring({
         to: { transform: true ? ` translateY(0px)` : ` translateY(-110%)`, opacity: true ? 1 : 0 },
@@ -146,51 +114,57 @@ const SideNav = (props) => {
         setOpenModal(!openModal)
     }
 
+    const sections = ["landing", "aboutme", "myhealthy", "expcon", "uassist", "contact"];
+
     return (
         <React.Fragment>
             { matches ?
-                <animated.div style={{
-                    ...sideBarAni, position: "fixed", paddingLeft: "40px", height: "fit-content", width: "10vw", left: "0px", top: "45%", display: "flex",
-                    justifyContent: "center", flexDirection: "column", zIndex: 2000
-                }} >
-                    <animated.div style={{ ...springFirst, cursor: "pointer" }} onClick={() => handleClick(0)} >
-                        <Divider style={{
-                            height: "3px", background: "white", borderRadius: "4px", marginBottom: "16px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
-                        }} />
-                    </animated.div>
-                    <animated.div style={{ ...springSecond, cursor: "pointer" }} onClick={() => handleClick(1)} >
-                        <Divider style={{
-                            height: "3px", background: "white", borderRadius: "4px", marginBottom: "16px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
-                        }} />
-                    </animated.div>
-                    <animated.div style={{ ...springThird, cursor: "pointer" }} onClick={() => handleClick(2)}>
-                        <Divider style={{
-                            height: "3px", background: "white", borderRadius: "4px", marginBottom: "16px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
-                        }} />
-                    </animated.div>
-                    <animated.div style={{ ...springForth, cursor: "pointer" }} onClick={() => handleClick(3)}>
-                        <Divider style={{
-                            height: "3px", background: "white", borderRadius: "4px", marginBottom: "16px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
-                        }} />
-                    </animated.div>
-                    <animated.div style={{ ...springFifth, cursor: "pointer" }} onClick={() => handleClick(4)}>
-                        <Divider style={{
-                            height: "3px", background: "white", borderRadius: "4px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
-                        }} />
-                    </animated.div>
-                    <div style={{ position: 'absolute', cursor: "pointer", width: "32px", height: "32px", zIndex: props.modalOpen ? 2000 : -1 }} onClick={() => handleCancel()}>
-                        <animated.div style={{ ...springCancel1, position: 'absolute' }} onClick={() => handleCancel()}>
-                            <Divider style={{
-                                height: "3px", background: "rgb(255, 77, 90)", borderRadius: "4px", width: "2rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
-                            }} />
-                        </animated.div>
-                        <animated.div style={{ ...springCancel2, position: 'absolute' }} onClick={() => handleCancel()}>
-                            <Divider style={{
-                                height: "3px", background: "rgb(255, 77, 90)", borderRadius: "4px", width: "2rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
-                            }} />
-                        </animated.div>
-                    </div>
-                </animated.div >
+                <Spring
+                    to={{ transform: "translateX(0%)" }}
+                    from={{
+                        transform: "translateX(-100%)", position: "fixed", paddingLeft: "40px", height: "fit-content",
+                        width: "10vw", left: "0px", top: "45%", display: "flex",
+                        justifyContent: "center", flexDirection: "column", zIndex: 2000
+                    }}
+                >
+                    {prop =>
+                        <div style={prop}>
+                            {
+                                sections.map((ele, index) => {
+                                    return (
+                                        <Spring
+                                            to={{
+                                                width: props.index === index ? `3rem` : "1.5rem",
+                                                transform: props.modalOpen ? "translateX(-100%)" : "translateX(0%)", opacity: props.modalOpen ? 0 : 1
+                                            }}
+                                            from={{
+                                                height: "fit-content", width: "1.5rem", cursor: "pointer", zIndex: 2000
+                                            }}>
+                                            {innerprop => <div style={innerprop} onClick={() => props.handleNavClick(index)}>
+                                                <Divider style={{
+                                                    height: "3px", background: "white", borderRadius: "4px", marginBottom: "16px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
+                                                }} />
+                                            </div>
+                                            }
+                                        </Spring>
+                                    )
+                                })
+                            }
+                            <div style={{ position: 'absolute', cursor: "pointer", width: "32px", height: "32px", zIndex: props.modalOpen ? 2000 : -1 }} onClick={() => handleCancel()}>
+                                <animated.div style={{ ...springCancel1, position: 'absolute' }} onClick={() => handleCancel()}>
+                                    <Divider style={{
+                                        height: "3px", background: "rgb(255, 77, 90)", borderRadius: "4px", width: "2rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
+                                    }} />
+                                </animated.div>
+                                <animated.div style={{ ...springCancel2, position: 'absolute' }} onClick={() => handleCancel()}>
+                                    <Divider style={{
+                                        height: "3px", background: "rgb(255, 77, 90)", borderRadius: "4px", width: "2rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
+                                    }} />
+                                </animated.div>
+                            </div>
+                        </div>
+                    }
+                </Spring>
                 :
                 <animated.div style={{ justifyContent: "space-between", display: props.modalOpen ? "none" : "flex", position: "fixed", right: `3.3vmax`, top: `5%`, cursor: "pointer", zIndex: 3000 }}>
                     <div onClick={() => handleModalOpen()}>
@@ -301,7 +275,7 @@ const SideNav = (props) => {
                     </Modal>
                 </animated.div>
             }
-        </React.Fragment>
+        </React.Fragment >
     )
 }
 

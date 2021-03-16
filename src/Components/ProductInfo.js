@@ -133,10 +133,12 @@ const ProductInfo = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <img src={props.content.mockAll} style={{ width: '100%', borderRadius: "3px", boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px" }} />
+                        <div>
+                            <img src={props.content.mockAll} style={{ width: '100%', borderRadius: "3px", boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px" }} />
+                        </div>
                         {props.content.longpic1 !== null ?
-                            <div style={{ width: "100vw", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "linear-gradient(#fff 33%, rgb(240,242,244) 33%)", paddingBottom: "4%" }}>
-                                <div style={{ display: "flex", alignItems: "center", marginTop: "4%" }}>
+                            <div style={{ transform: "translateY(-0.5%)", width: "100vw", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "linear-gradient(#fff 33%, rgb(240,242,244) 33%)", paddingBottom: "4%" }}>
+                                <div style={{ display: "flex", alignItems: "center", marginTop: "6.6vmax  " }}>
                                     <div style={{ position: "absolute", left: "0%", display: "flex", alignItems: "center", marginBottom: "9%" }}>
                                         <Divider style={{ height: "4px", background: "rgba(7, 33, 66, 0.9)", borderRadius: "4px", width: "1.5rem", marginRight: "1rem" }} />
                                         <Typography style={{

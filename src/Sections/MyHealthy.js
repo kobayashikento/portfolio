@@ -5,8 +5,8 @@ import Divider from '@material-ui/core/Divider';
 
 import { useSpring, animated, config, useSprings } from 'react-spring'
 
-import expconVid from '../Assets/videos/expcondemo.mov';
-import pauseVideo from '../Assets/videos/expcondemopauseedit2.png';
+import video from '../Assets/videos/myhealthy_video.mp4';
+import pauseVideo from '../Assets/pictures/myhealthyfamily_pic.png';
 
 import HoverVideoPlayer from 'react-hover-video-player';
 
@@ -19,8 +19,8 @@ import MobileContent from '../Components/MobileContent';
 import Modal from '@material-ui/core/Modal';
 import ProductInfo from '../Components/ProductInfo';
 
-import mockOverview from '../Assets/pictures/expcon_main_mock.png';
-import mockAll from '../Assets/pictures/expcon_all_mock.png';
+import mockOverview from '../Assets/pictures/myhealthy_main.png';
+import mockAll from '../Assets/pictures/myhealthy_secon.png';
 import longpic1 from '../Assets/pictures/expcon_long_1.png';
 import longpic2 from '../Assets/pictures/expcon_long_2.png';
 
@@ -29,12 +29,12 @@ import { setModalOpen } from '../Redux/actions/propertyAction';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-const content = {
-    mockOverview: mockOverview, dutiesText: ["designer", "developer"], techText: ["React", "Redux", "JavaScript", "Material UI"],
-    dateText: "Jan, 2021", overviewText: "A website that focuses on building an interactive online music experience.",
-    mockAll: mockAll, detailsText: "This website was built using React and focuses heavily on engaging the viewers through the use of parallaxes and meaningful animations. I created functional components for sections that had similar layouts to reduce unnecessary code and used React Redux so that components would share global states to reduce client-side lags.",
+const content = { 
+    mockOverview: mockOverview, dutiesText: ["designer", "developer"], techText: ["Shopify", "React", "Redux", "Storefront API"],
+    dateText: "March, 2021", overviewText: "Redesigning an existing website to improve the UX and UI to increase retention rate and decrease bounce rate.",
+    mockAll: mockAll, detailsText: "This website adds functionalities that are not present in the default Shopify theme such as on hover drop-down menu, on-demand search, improved design on the image carousel, and better navigation menu.",
     longpic1: longpic1, longpic2: longpic2, mainPicWidth: "70%",
-    focusDevText: "Learned WebGL and three.JS to build a  more interactive video transition for the landing page. In addition, I learned GSAP (GreenSock) to implement scrollTo() handlers on the react-smooth-scrollbar library instead of creating a separate onScroll Listneter to time the animations which significantly reduce the lag.",
+    focusDevText: "This website adds functionalities that are not present in the default Shopify such as on hover drop-down menu, on-demand search, improved design on the image carousel, and better navigation menu. ",
     focusDesignText: "Implemented a parallax effect through CSS properties and onScroll Listeners to make the website feel longer and wider with the purpose of further engaging the user. Took advantage of the contrast between bright and dark colors to create an “interactive” experience."
 }
 
@@ -155,9 +155,9 @@ const Expcon = (props) => {
                         <animated.div style={springFirst}>
                             <Typography style={{
                                 color: "white", fontFamily: "FuturaM", fontSize: "5.2rem",
-                                letterSpacing: "0.5rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.3)", fontWeight: "bold"
+                                letterSpacing: "0.5rem", textShadow: "0 10px 30px rgba(2, 11, 22, 0.3)", fontWeight: "bold", maxWidth: "60vw"
                             }}>
-                                EXP|CON
+                                My Healthy Family
                 </Typography>
                         </animated.div>
                         <div style={{ overflow: "hidden", marginTop: "1%" }}>
@@ -173,7 +173,7 @@ const Expcon = (props) => {
                                 width: "max-content", color: "white", fontFamily: "FuturaB", fontSize: "1.8rem", letterSpacing: "0.2rem",
                                 marginTop: "4px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
                             }}>
-                                website
+                                e-commerce website
                     </Typography>
                         </animated.div>
                         <animated.div style={springSecond}>
@@ -181,7 +181,7 @@ const Expcon = (props) => {
                                 width: "max-content", color: "rgba(255,255,255,0.7)", fontFamily: "FuturaM", fontSize: "16px",
                                 letterSpacing: "1.5px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
                             }}>
-                                React, Firebase, Redux, JavaScript
+                               Shopify, React, Storefront API
                     </Typography>
                         </animated.div>
                         <animated.div style={springSecond}>
@@ -198,7 +198,7 @@ const Expcon = (props) => {
                     }}>
                         <animated.div style={videoOverlay} />
                         <HoverVideoPlayer
-                            videoSrc={expconVid}
+                            videoSrc={video}
                             sizingMode="container"
                             style={{ width: "100%", height: "100%" }}
                             pausedOverlay={<img src={pauseVideo} alt="" style={{ width: "100%", height: "100%", borderRadius: "2px" }} />}
@@ -207,7 +207,7 @@ const Expcon = (props) => {
                             <Typography style={{
                                 width: "max-content", color: "white", fontFamily: "'Abril Fatface', cursive", fontSize: "7rem", textShadow: "0 10px 30px rgb(2 11 22 / 50%)"
                             }}>
-                                03
+                                02
                     </Typography>
                         </animated.div>
                     </animated.div>

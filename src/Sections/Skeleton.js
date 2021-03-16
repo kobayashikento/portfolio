@@ -7,14 +7,15 @@ import Expcon from './Expcon';
 import About from './About';
 import UAssist from './UAssist';
 import Contact from './Contact';
+import MyHealthy from './MyHealthy';
+
+import { useSpring, animated } from 'react-spring';
 
 import { useGesture } from 'react-use-gesture';
 
 import { Lethargy } from 'lethargy'
 
 import '../Assets/styles/skeletonCSS.css';
-
-import { useSpring, animated } from 'react-spring';
 
 import { connect } from 'react-redux';
 
@@ -24,124 +25,11 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Typist from 'react-typist';
 import 'react-typist/dist/Typist.css';
 
-const lethargy = new Lethargy()
-const slides = [0, 1, 2, 3, 4]
-const clamp = (value, min, max) => Math.max(Math.min(max, value), min)
+import { preaboutcode, precode, code, preexpcode, expcode, aboutCode, codeSections } from '../Assets/constants';
 
-const precode = [
-    { indent: 0, content: ` ` },
-    { indent: 0, content: "const trans1 = (x, y) => translate3d(${x / 50}px,${y / 50}px,0);" },
-    { indent: 0, content: "const trans2 = (x, y) => translate3d(${x / 8 + 35}px,${y / 8 - 130}px,0);" },
-    { indent: 0, content: "const trans3 = (x, y) => translate3d(${x / 6 - 20}px,${y / 6 - 90}px,0);" },
-    { indent: 0, content: ` ` },
-]
-const code = [
-    { indent: 0, content: ` ` },
-    { indent: 2, content: `carouselState` },
-    { indent: 2, content: `const [prop, set] = useSpring(() => (` },
-    { indent: 3, content: `xyConfig` },
-    { indent: 2, content: `);` },
-    { indent: 0, content: ` ` },
-    { indent: 2, content: `React.useEffect(() => {` },
-    { indent: 3, content: `const timer = setTimeout(() => {` },
-    { indent: 4, content: `setCarouselIndex` },
-    { indent: 3, content: `}, 4000);` },
-    { indent: 3, content: `return () => clearTimeout(timer);` },
-    { indent: 2, content: `}, [carouselIndex, setCarouselIndex]);` },
-    { indent: 0, content: ` ` },
-    { indent: 2, content: `return ( ` },
-    { indent: 3, content: `<div onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}>` },
-    { indent: 4, content: `<animated.div style={carouselSprings}>` },
-    { indent: 5, content: `trans1` },
-    { indent: 4, content: `</animated.div>` },
-    { indent: 4, content: `<animated.div style={carouselSprings}>` },
-    { indent: 5, content: `trans2` },
-    { indent: 4, content: `</animated.div>` },
-    { indent: 4, content: `<animated.div style={carouselSprings}>` },
-    { indent: 5, content: `trans3` },
-    { indent: 4, content: `</animated.div>` },
-    { indent: 3, content: `</div>` },
-    { indent: 2, content: `)` },
-    { indent: 1, content: `}` },
-    { indent: 0, content: ` ` },
-]
-const preexpcode = [
-    { indent: 0, content: `import HoverVideoPlayer from 'react-hover-video-player';` },
-    { indent: 0, content: ` ` },
-    { indent: 0, content: `import expconVid from '../Assets/videos/expcon_demo.mov';` },
-    { indent: 0, content: `import pauseVideo from '../Assets/videos/expcon_demo_edit.png;` },
-    { indent: 0, content: ` ` },
-]
-const expcode = [
-    { indent: 0, content: ` ` },
-    { indent: 2, content: `const videoSpring = useSpring({` },
-    { indent: 3, content: `to: { transform: props.render ? "scale(1) translate(0%, -50%)" :` },
-    { indent: 4, content: `"scale(0.7) translate(10% ,-50%)", opacity: props.render ? 1 : 0 },` },
-    { indent: 3, content: `from: { right: "8%", top: "50%", transform: "scale(0.6) translate(10% ,-50%)",` },
-    { indent: 4, content: `transformOrigin: "top center 20px", opacity: 0 },` },
-    { indent: 3, content: `config: { duration: 1200, easing: easings.easeQuadOut },` },
-    { indent: 3, content: `delay: 400` },
-    { indent: 2, content: `})` },
-    { indent: 0, content: ` ` },
-    { indent: 2, content: `return (` },
-    { indent: 0, content: ` ` },
-    { indent: 3, content: `<animated.div style={{ overflow: "hidden", display: "flex", height: "100%">` },
-    { indent: 4, content: `expcon` },
-    { indent: 4, content: `website` },
-    { indent: 4, content: `skills` },
-    { indent: 4, content: `<button className="exploreBtn">Explore</button>` },
-    { indent: 3, content: `</aniamted.div>` },
-    { indent: 0, content: ` ` },
-    { indent: 3, content: `<animated.div style={videoSpring}>` },
-    { indent: 4, content: `<animated.div style={videoOverlay} />` },
-    { indent: 4, content: `<HoverVideoPlayer` },
-    { indent: 5, content: `videoSrc={expconVid}` },
-    { indent: 5, content: `pausedOverlay={<img src={pauseVideo}` },
-    { indent: 4, content: `/>` },
-    { indent: 3, content: `</aniamted.div>` },
-    { indent: 0, content: ` ` },
-    { indent: 2, content: `)` },
-    { indent: 1, content: `}` },
-]
-const aboutCode = [
-    { indent: 0, content: ` ` },
-    { indent: 2, content: `const imageSpring = useSpring({` },
-    { indent: 3, content: `to: { transform: props.render ? "scale(1) translate(0%, -50%)" :` },
-    { indent: 4, content: `"scale(0.7) translate(10% ,-50%)", opacity: props.render ? 1 : 0 },` },
-    { indent: 3, content: `from: { right: "8%", top: "50%", transform: "scale(0.6) translate(10% ,-50%)",` },
-    { indent: 4, content: `transformOrigin: "top center 20px", opacity: 0 },` },
-    { indent: 3, content: `config: { duration: 1200, easing: easings.easeQuadOut },` },
-    { indent: 3, content: `delay: 400` },
-    { indent: 2, content: `})` },
-    { indent: 0, content: ` ` },
-    { indent: 2, content: `return (` },
-    { indent: 0, content: ` ` },
-    { indent: 3, content: `<animated.div style={{ overflow: "hidden", display: "flex", height: "100%">` },
-    { indent: 4, content: `about` },
-    { indent: 4, content: `developer` },
-    { indent: 4, content: `uoft` },
-    { indent: 4, content: `<button className="moreBtn">More</button>` },
-    { indent: 3, content: `</aniamted.div>` },
-    { indent: 0, content: ` ` },
-    { indent: 3, content: `<animated.div style={imageSpring}>` },
-    { indent: 4, content: `<animated.div style={videoOverlay} />` },
-    { indent: 4, content: `<img src={aboutPic} style={{height: "100%", width: "100%", borderRadius: "2px"}} />` },
-    { indent: 4, content: `<Typography style={{ fontFamily: "'Abril Fatface', cursive", fontSize: "7rem" }}>` },
-    { indent: 5, content: `02` },
-    { indent: 4, content: `</Typography>` },
-    { indent: 4, content: `/>` },
-    { indent: 3, content: `</aniamted.div>` },
-    { indent: 0, content: ` ` },
-    { indent: 2, content: `)` },
-    { indent: 1, content: `}` },
-]
-const codeSections = [
-    { content: `PortfolioLandingPage` },
-    { content: `AboutSection` },
-    { content: `ExpconSection` },
-    { content: `UAssistSection` },
-    { content: `ContactSection` },
-]
+const lethargy = new Lethargy()
+const slides = [0, 1, 2, 3, 4, 5]
+const clamp = (value, min, max) => Math.max(Math.min(max, value), min)
 
 const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]
 const trans1 = (x, y) => `translate3d(${-x / 40}px,${-y / 40}px,0)`
@@ -150,18 +38,22 @@ const Skeleton = (props) => {
 
     const matches = useMediaQuery('(min-width:1200px)', { noSsr: true });
 
+    //states
     const [clear, setClear] = React.useState(false);
-    const [landingRender, setLandingRender] = React.useState(true);
-    const [expconRender, setExpconRender] = React.useState(true);
     const [landingSVG, setLandingSVG] = React.useState(true);
-    const [aboutRender, setAboutRender] = React.useState(false);
-    const [uassistRender, setUassistRender] = React.useState(false);
-    const [contactRender, setContactRender] = React.useState(false);
 
+    // index for the scroller using lethargy
     const [index, setIndex] = React.useState(0)
 
+    // active index = render, 0: landing, 1: aboutme, ...
+    const [render, setRender] = React.useState(0);
+
+    // states to check if background typing is done
     const [stateTypeDone, setStateTypeDone] = React.useState(false);
     const [xyTypeDone, setXYTypeDone] = React.useState(false);
+
+    // landingPage svg carousel
+    const [carouselIndex, setCarouselIndex] = React.useState(0);
 
     const bind = useGesture({
         onWheel: ({ event, last, memo: wait = false, direction }) => {
@@ -210,8 +102,8 @@ const Skeleton = (props) => {
                     setClear(false);
                 }, 0);
                 setTimeout(() => {
-                    setLandingRender(true);
-                    setAboutRender(false);
+                    // render landing - index 0
+                    setRender(0);
                 }, 0);
                 break;
             case 1:
@@ -220,9 +112,8 @@ const Skeleton = (props) => {
                     setClear(false);
                 }, 0);
                 setTimeout(() => {
-                    setAboutRender(true);
-                    setExpconRender(false);
-                    setLandingRender(false);
+                    // render 1
+                    setRender(1);
                     setLandingSVG(false);
                     setXYTypeDone(false);
                     setStateTypeDone(false);
@@ -234,9 +125,7 @@ const Skeleton = (props) => {
                     setClear(false);
                 }, 0);
                 setTimeout(() => {
-                    setExpconRender(true);
-                    setAboutRender(false);
-                    setUassistRender(false);
+                    setRender(2);
                 }, 0);
                 break;
             case 3:
@@ -245,9 +134,7 @@ const Skeleton = (props) => {
                     setClear(false);
                 }, 0);
                 setTimeout(() => {
-                    setExpconRender(false);
-                    setUassistRender(true);
-                    setContactRender(false);
+                    setRender(3);
                 }, 0);
                 break;
             case 4:
@@ -256,14 +143,21 @@ const Skeleton = (props) => {
                     setClear(false);
                 }, 0);
                 setTimeout(() => {
-                    setUassistRender(false);
-                    setContactRender(true);
+                    setRender(4);
                 }, 0);
                 break;
+            case 5:
+                setClear(true);
+                setTimeout(() => {
+                    setClear(false);
+                }, 0);
+                setTimeout(() => {
+                    setRender(5);
+                }, 0);
+                break;
+            default:
         }
     }, [index])
-
-    const [carouselIndex, setCarouselIndex] = React.useState(0);
 
     React.useEffect(() => {
         const timer = setTimeout(() => {
@@ -271,13 +165,6 @@ const Skeleton = (props) => {
         }, 4000);
         return () => clearTimeout(timer);
     }, [carouselIndex, setCarouselIndex]);
-
-    const preaboutcode = [
-        { indent: 0, content: ` ` },
-        { indent: 0, content: `importPic` },
-        { indent: 0, content: `import * as easings from 'd3-ease';` },
-        { indent: 0, content: ` ` },
-    ]
 
     const makeLandingCodeAni = () => {
         return code.map((snippet, index) => {
@@ -426,13 +313,13 @@ const Skeleton = (props) => {
                             {`import `}
                         </span>
                         <span style={{ color: "rgb(255, 77, 90)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
-                            {currIndex === 1 ? `aboutPic` : currIndex === 3 ? `uAssistPic` : `torontoPic`}
+                            {currIndex === 1 ? `aboutPic` : currIndex === 2 ? `myhealthyPic` : currIndex === 4 ? `uAssistPic` : `torontoPic`}
                         </span>
                         <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                             {` from '../Assets/pictures/`}
                         </span>
                         <span style={{ color: "rgb(255, 77, 90)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
-                            {currIndex === 1 ? `about_pic` : currIndex === 3 ? `uAssist_pic` : `toronto_pic`}
+                            {currIndex === 1 ? `about_pic` : currIndex === 2 ? `myhealthy_pic` : currIndex === 4 ? `uAssist_pic` : `toronto_pic`}
                         </span>
                         <span style={{ color: "rgba(255,255,255,0.4)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
                             {`.png';`}
@@ -455,7 +342,7 @@ const Skeleton = (props) => {
                             {`<Typography style={{ fontFamily: "FuturaM", fontSize: "5.2rem" }}>`}
                         </span>
                         <span style={{ color: "rgb(255, 77, 90)", whiteSpace: "pre" }}>
-                            {currIndex === 1 ? `About` : currIndex === 3 ? `UAssist` : `Get In Touch`}
+                            {currIndex === 1 ? `About` : currIndex === 2 ? `MyHealthyFamily` : currIndex === 4 ? `UAssist` : `Get In Touch`}
                         </span>
                         <span style={{ color: "rgba(255,255,255,0.4)", whiteSpace: "pre" }}>
                             {`</Typography>`}
@@ -466,7 +353,7 @@ const Skeleton = (props) => {
                                 {`<Typography style={{ fontFamily: "FuturaB", fontSize: "1.5rem" }}>`}
                             </span>
                             <span style={{ color: "rgb(255, 77, 90)", whiteSpace: "pre" }}>
-                                {currIndex === 1 ? `Front-End Developer` : currIndex === 3 ? `website` : `Leave a message`}
+                                {currIndex === 1 ? `Front-End Developer` : currIndex === 2 ? `e-commerce website` : currIndex === 4 ? `website` : `Leave a message`}
                             </span>
                             <span style={{ color: "rgba(255,255,255,0.4)", whiteSpace: "pre" }}>
                                 {`</Typography>`}
@@ -478,7 +365,8 @@ const Skeleton = (props) => {
                                 </span>
                                 <span style={{ color: "rgb(255, 77, 90)", whiteSpace: "pre" }}>
                                     {``}
-                                    {currIndex === 1 ? `U of T Grad: Mathematics and Statistics` : currIndex === 3 ? `MangoDB, Express, Bootstrap, JavaScript` : `Based in Toronto, Fueled by coffee :)`}
+                                    {currIndex === 1 ? `U of T Grad: Mathematics and Statistics` :
+                                        currIndex === 2 ? `Shopify, React, Storefront API` : currIndex === 4 ? `MangoDB, Express, Bootstrap, JavaScript` : `Based in Toronto, Fueled by coffee :)`}
                                 </span>
                                 <span style={{ color: "rgba(255,255,255,0.4)", whiteSpace: "pre" }}>
                                     {`</Typography>`}
@@ -486,7 +374,7 @@ const Skeleton = (props) => {
                             </Typist> : snippet.content === `02` ?
                                 <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
                                     <span style={{ color: "rgb(255, 77, 90)", marginLeft: `${snippet.indent}rem`, whiteSpace: "pre" }}>
-                                        {currIndex === 1 ? `01` : currIndex === 3 ? `03` : `04`}
+                                        {currIndex === 1 ? `01` : currIndex === 2 ? `02` : currIndex === 4 ? `04` : `05`}
                                     </span>
                                 </Typist>
                                 : <Typist avgTypingDelay={5} startDelay={100 * index} cursor={{ show: false }}>
@@ -524,7 +412,7 @@ const Skeleton = (props) => {
                             {`import { useSpring, animated } from 'react-spring';`}
                         </span>
                     </Typist>
-                    {clear ? null : index === 2 ? makeExconPreCodeAni() : index === 0 ? makeLandingPreCodeAni() : makeAboutPreCodeAni(index)}
+                    {clear ? null : index === 3 ? makeExconPreCodeAni() : index === 0 ? makeLandingPreCodeAni() : makeAboutPreCodeAni(index)}
                     <div style={{ display: "flex" }}>
                         <Typist avgTypingDelay={5} startDelay={500} cursor={{ show: false }}>
                             <span style={{ marginLeft: `${1}rem`, whiteSpace: "pre", color: "rgba(255,255,255,0.4)" }}>
@@ -542,7 +430,7 @@ const Skeleton = (props) => {
                             </span>
                         </Typist>
                     </div>
-                    {clear ? null : index === 2 ? makeExconCodeAni() : index === 0 ? makeLandingCodeAni() : makeAboutCodeAni(index)}
+                    {clear ? null : index === 3 ? makeExconCodeAni() : index === 0 ? makeLandingCodeAni() : makeAboutCodeAni(index)}
                     <div style={{ display: "flex" }}>
                         <Typist avgTypingDelay={5} startDelay={2500} cursor={{ show: false }}>
                             <span style={{ marginLeft: `${0}rem`, whiteSpace: "pre", color: "rgba(255,255,255,0.4)" }}>
@@ -566,21 +454,24 @@ const Skeleton = (props) => {
             }
             <div className="slider" style={{ transform: `translateY(${-index * 100}vh)` }}>
                 <Landing
-                    render={landingRender}
+                    render={render === 0}
                     svgRender={landingSVG}
                     carouselIndex={carouselIndex}
                 />
                 <About
-                    render={aboutRender}
+                    render={render === 1}
+                />
+                <MyHealthy
+                    render={render === 2}
                 />
                 <Expcon
-                    render={expconRender}
+                    render={render === 3}
                 />
                 <UAssist
-                    render={uassistRender}
+                    render={render === 4}
                 />
                 <Contact
-                    render={contactRender}
+                    render={render === 5}
                 />
             </div>
         </div >
