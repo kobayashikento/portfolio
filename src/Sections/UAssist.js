@@ -197,9 +197,9 @@ const UAssist = (props) => {
                             boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
                         }}>
                         <animated.div style={videoOverlay} />
-                        <img src={uassistClearPic} style={{ height: "100%", width: "100%", borderRadius: "2px", position: "absolute" }} />
+                        <img src={uassistClearPic} style={{ objectFit: "cover", height: "100%", width: "100%", borderRadius: "2px", position: "absolute" }} />
                         <animated.div style={imageHoverSpring} onMouseEnter={() => setImageHover(true)} onMouseLeave={() => setImageHover(false)}>
-                            <img src={uassistPic} style={{ height: "100%", width: "100%", borderRadius: "2px", position: "absolute" }} />
+                            <img src={uassistPic} style={{ objectFit: "cover",height: "100%", width: "100%", borderRadius: "2px", position: "absolute" }} />
                         </animated.div>
                         <animated.div style={springThird}>
                             <Typography style={{

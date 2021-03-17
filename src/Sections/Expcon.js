@@ -201,7 +201,7 @@ const Expcon = (props) => {
                             videoSrc={expconVid}
                             sizingMode="container"
                             style={{ width: "100%", height: "100%" }}
-                            pausedOverlay={<img src={pauseVideo} alt="" style={{ width: "100%", height: "100%", borderRadius: "2px" }} />}
+                            pausedOverlay={<img src={pauseVideo} alt="" style={{ objectFit: "cover", width: "100%", height: "100%", borderRadius: "2px" }} />}
                         />
                         <animated.div style={springThird}>
                             <Typography style={{

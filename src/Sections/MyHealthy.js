@@ -21,8 +21,8 @@ import ProductInfo from '../Components/ProductInfo';
 
 import mockOverview from '../Assets/pictures/myhealthy_main.png';
 import mockAll from '../Assets/pictures/myhealthy_secon.png';
-import longpic1 from '../Assets/pictures/expcon_long_1.png';
-import longpic2 from '../Assets/pictures/expcon_long_2.png';
+import longpic1 from '../Assets/pictures/myhealthy_s1.png';
+import longpic2 from '../Assets/pictures/myhealthy_s2.png';
 
 import { connect } from 'react-redux';
 import { setModalOpen } from '../Redux/actions/propertyAction';
@@ -30,12 +30,12 @@ import { setModalOpen } from '../Redux/actions/propertyAction';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const content = { 
-    mockOverview: mockOverview, dutiesText: ["designer", "developer"], techText: ["Shopify", "React", "Redux", "Storefront API"],
+    mockOverview: mockOverview, dutiesText: ["designer", "developer"], techText: ["Shopify", "React", "GraphQL", "Redux", "Storefront API"],
     dateText: "March, 2021", overviewText: "Redesigning an existing website to improve the UX and UI to increase retention rate and decrease bounce rate.",
     mockAll: mockAll, detailsText: "This website adds functionalities that are not present in the default Shopify theme such as on hover drop-down menu, on-demand search, improved design on the image carousel, and better navigation menu.",
     longpic1: longpic1, longpic2: longpic2, mainPicWidth: "70%",
-    focusDevText: "This website adds functionalities that are not present in the default Shopify such as on hover drop-down menu, on-demand search, improved design on the image carousel, and better navigation menu. ",
-    focusDesignText: "Implemented a parallax effect through CSS properties and onScroll Listeners to make the website feel longer and wider with the purpose of further engaging the user. Took advantage of the contrast between bright and dark colors to create an “interactive” experience."
+    focusDevText: "Shopify's Storefront API and GraphQL queries were used to retrieve the needed data about the product, the store, and the customer. The benefit of using Storefront API is that 1) two stores co-exist in parallel, the original Shopify store, and the React/Storefront Store. 2) when the time comes for a checkout, Storefront sends the original Shopify store a list of the customer's cart and the original store proceeds with the checkout. No code associated with payment and transaction (Stripe) is altered.",
+    focusDesignText: "Focused to make sure the customer's shopping experience was uninterrupted and added breadcrumbs for easy navigation between pages. Prioritized on simplicity over expensive animations (time-wise) to make sure that information was retrieved and shown as soon as possible."
 }
 
 const Slide = React.forwardRef(function Slide(props, ref) {
@@ -181,7 +181,7 @@ const Expcon = (props) => {
                                 width: "max-content", color: "rgba(255,255,255,0.7)", fontFamily: "FuturaM", fontSize: "16px",
                                 letterSpacing: "1.5px", textShadow: "0 10px 30px rgba(2, 11, 22, 0.5)"
                             }}>
-                               Shopify, React, Storefront API
+                               Shopify, React, Storefront API, GraphQL
                     </Typography>
                         </animated.div>
                         <animated.div style={springSecond}>
@@ -201,7 +201,7 @@ const Expcon = (props) => {
                             videoSrc={video}
                             sizingMode="container"
                             style={{ width: "100%", height: "100%" }}
-                            pausedOverlay={<img src={pauseVideo} alt="" style={{ width: "100%", height: "100%", borderRadius: "2px" }} />}
+                            pausedOverlay={<img src={pauseVideo} alt="" style={{ width: "100%", height: "100%", borderRadius: "2px", objectFit: "cover" }} />}
                         />
                         <animated.div style={springThird}>
                             <Typography style={{

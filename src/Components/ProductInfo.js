@@ -15,6 +15,8 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import UseAnimations from 'react-useanimations';
 import arrowDownCircle from 'react-useanimations/lib/arrowDownCircle';
 
+import Skeleton from '@material-ui/lab/Skeleton';
+
 const ProductInfo = (props) => {
     // layout 
     // 1 - 100vh 
@@ -28,6 +30,9 @@ const ProductInfo = (props) => {
     // Mockup psd created by aleksandr_samochernyi - www.freepik.com
 
     const scrollbarRef = React.useRef(null);
+
+    const [mockLoaded, setMockLoaded] = React.useState(false);
+    const [mockSec, setMockSec] = React.useState(false);
 
     const matches = useMediaQuery('(min-width:1200px)', { noSsr: true });
 
@@ -113,7 +118,11 @@ const ProductInfo = (props) => {
                                     </Typography>
                                 </div>
                             </div>
-                            <img src={props.content.mockOverview} style={{ marginTop: "4%", height: "auto", width: props.content.mainPicWidth, borderRadius: "3px", boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px" }} />
+                            <div style={{ display: "flex", justifyContent: "center" }}>
+                                <img src={props.content.mockOverview} onLoad={() => setMockLoaded(true)}
+                                    style={{ display: mockLoaded ? "" : "none", marginTop: "4%", height: "auto", width: props.content.mainPicWidth, borderRadius: "3px", boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px" }} />
+                                <Skeleton animation="wave" width={window.innerWidth * 0.6} height={window.innerHeight * 0.8} style={{ display: mockLoaded ? "none" : "" }} />
+                            </div>
                             <div style={{ marginTop: "5%", paddingBottom: "5%" }}>
                                 <div style={{ position: "absolute", left: "0%", display: "flex", alignItems: "center", marginBottom: "10%" }}>
                                     <Divider style={{ height: "4px", background: "rgba(7, 33, 66, 0.9)", borderRadius: "4px", width: "1.5rem", marginRight: "1rem" }} />
@@ -133,8 +142,9 @@ const ProductInfo = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <img src={props.content.mockAll} style={{ width: '100%', borderRadius: "3px", boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px" }} />
+                        <div style={{ display: "flex", justifyContent: "center", backgroundColor: "white" }}>
+                            <Skeleton animation="wave" width={window.innerWidth * 0.8} height={window.innerHeight} style={{ display: mockSec ? "none" : "" }} />
+                            <img onLoad={() => setMockSec(true)} src={props.content.mockAll} style={{ display: mockSec ? "" : "none", width: '100%', borderRadius: "3px", boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px" }} />
                         </div>
                         {props.content.longpic1 !== null ?
                             <div style={{ transform: "translateY(-0.5%)", width: "100vw", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "linear-gradient(#fff 33%, rgb(240,242,244) 33%)", paddingBottom: "4%" }}>
