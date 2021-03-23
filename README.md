@@ -1,3 +1,5 @@
+https://kento-kobayashi.dev/
+
 Second attempt in making a Portfolio using React and other libraries such as: 
 - React-Spring
 - React-custom-scrollbar
